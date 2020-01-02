@@ -7,7 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent {
 
-  title = 'Telenor Customer Care';
+  title = 'Customer Care';
   constructor(private spinner: NgxSpinnerService) {
 
   }
