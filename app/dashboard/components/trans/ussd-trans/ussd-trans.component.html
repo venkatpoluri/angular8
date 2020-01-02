@@ -1,0 +1,208 @@
+
+<section class="basic_details sticky base80">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <app-trans-header></app-trans-header>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+
+
+                <div class="detail_title">
+                  <h4>
+                    <i class="icon-settings"></i><span class="user">USSD Transactions</span>
+                    <button type="button" [ngClass]="isOpen ? 'btn btn-outline-grey btn_custom1 pull-right marg10' : 'btn btn-outline-primary btn_custom1 pull-right marg10'" (click)="toggle()">
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+                    </button>
+                    <!--<a [ngClass]="isOpen ? 'cmp-fa-gray pull-right marg10' : 'cmp-fa pull-right marg10'" mat-mini-fab (click)="toggle()">
+    <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+    <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+  </a>-->
+
+                  </h4>
+                </div>
+                <div class="container px-lg-3 my-1 p-1 bg-white rounded shadow-sm" [@openClose]="isOpen ? 'open' : 'closed'">
+                  <div class="row">
+                    <div class="form-group no-margin">
+                      <div class="col-md-12">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>Start Date</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.startDate" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+                                 autocomplete="off" placeholder="Start Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt1></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <div class="col-md-12">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>End Date</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.endDate" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" autocomplete="off" placeholder="End Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt2></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <!--<a mat-mini-fab class="cmp-fa" (click)="gettransactions()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></a>-->
+                      <button type="button" class="btn btn-outline-primary btn_custom" (click)="gettransactions()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="container px-lg-1 my-1 p-1 bg-white rounded shadow-sm pos_abs">
+                  <div fxLayout="row">
+                    <div class="data-container">
+                      <!--<div class="data-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>-->
+
+                      <div class=" data-table-container" *ngIf="dataSource.data.length > 0">
+
+                        <table mat-table [dataSource]="dataSource" matSort class="data-table" (matSortChange)="customSort($event)">
+                          <ng-container matColumnDef="gtrid" sticky>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>GTR ID</th>
+                            <td mat-cell *matCellDef="let row">{{row?.gtrid}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicename">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE NAME</th>
+                            <td mat-cell *matCellDef="let row">{{row?.servicename}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="service_type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGE TYPE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.service_type}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicegroup">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE GROUP</th>
+                            <td mat-cell *matCellDef="let row">{{row?.servicegroup}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="trans_type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>TRANS TYPE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.trans_type}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="originating_timestamp">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>TRANS DONE ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.originating_timestamp}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="sourcechannel">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SOURCE CHANNEL</th>
+                            <td mat-cell *matCellDef="let row">{{row?.sourcechannel}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="sendercode">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>DIAL CODE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.sendercode}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="message">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>DIAL STRING</th>
+                            <td mat-cell *matCellDef="let row">
+                              <!--{{row?.message | truncate : 25}}-->
+
+                              <app-truncated-text [text]="row?.message" limit="30"></app-truncated-text>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="submittimestamp">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>RECEIVED ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.submittimestamp}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="partner_del_status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>PARTNER NOTIFY STATUS</th>
+                            <td mat-cell *matCellDef="let row">
+                              <span class="badge badge-success"
+                                    [ngClass]="{'badge-success' : row?.partner_del_status.toLowerCase()=='submitted' || row?.partner_del_status.toLowerCase()=='success',
+                                                'badge-danger' : row?.partner_del_status.toLowerCase()=='failed' || row?.partner_del_status.toLowerCase()=='disabled',
+                                                'badge-warning' : row?.partner_del_status.toLowerCase()=='free'}">{{row?.partner_del_status}}</span>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="partner_del_timestamp">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>NOTIFY STATUS ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.partner_del_timestamp}}</td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="charge_status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGE STATUS</th>
+                            <td mat-cell *matCellDef="let row">
+                              <span class="badge badge-success"
+                                    [ngClass]="{'badge-success' : row?.charge_status.toLowerCase()=='submitted' || row?.charge_status.toLowerCase()=='success',
+                                                'badge-danger' : row?.charge_status.toLowerCase()=='failed' || row?.charge_status.toLowerCase()=='disabled',
+                                                'badge-warning' : row?.charge_status.toLowerCase()=='free'}">{{row?.charge_status}}</span>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="charged_price">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGE VALUE(B)</th>
+                            <td mat-cell *matCellDef="let row">{{row?.charged_price}}</td>
+                          </ng-container>
+
+
+                          <ng-container cdkColumnDef="actions" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
+                            <td *cdkCellDef="let row">
+                              <button matTooltip="Get Service Details" (click)="serviceGroup(row)" class="btn black mt-ladda-btn button-ladda btn-circle btn-outline btn-xs">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: { id: 'ussd_server_pagination', itemsPerPage: pageObject.pageSize, currentPage: pageObject.pageNo, totalItems: pageObject.totalRecords}"></tr>
+                        </table>
+                      </div>
+
+                      <div class="nodata" *ngIf="dataSource.data.length === 0"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No Data Found</div>
+
+                      <div class=" px-lg-1 my-1 bg-white rounded shadow-sm clearfix" *ngIf="pageObject.totalRecords > 0">
+                        <div class="mt-0 pull-left">
+
+                          <div class="row">
+                            <div class="col-md-12 mt-0 text-left">
+                              <mat-paginator #paginator class="custom-pagesize" [length]="pageObject?.totalRecords"
+                                             [pageSize]="pageObject?.pageSize" (page)="changePageSize($event)"
+                                             [pageSizeOptions]="[5, 10, 25, 100]">
+                              </mat-paginator>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mt-3 pull-right">
+                          <pagination-controls class="my-pagination"
+                                               (pageChange)="changePage($event)"
+                                               screenReaderCurrentLabel="You're on page"
+                                               id="ussd_server_pagination">
+                          </pagination-controls>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+

@@ -1,0 +1,95 @@
+<form name="uploadfile" #uploadFile='ngForm' id="uploadFile" novalidate>
+  
+  <div class="file_upload">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="filename">
+            <input class ="input-uploader"  type="file" accept=".txt,.xls,.xlsx,.csv" ng2FileSelect [uploader]="uploader" multiple required />
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="uploader?.queue?.length > 0">
+        <div class="col-md-12">
+          <div class="upload_tab">
+
+            <p>Queue length: {{ uploader?.queue?.length }}</p>
+
+            <table class="table">
+              <thead> 
+                <tr>
+                  <th width="50%">Name</th>
+                  <!--<th>Extension</th>-->
+                  <th>Size</th>
+                  <th>Progress</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of uploader.queue">
+                  <td class="td-break20">{{ item?.file?.name }}</td>
+                  <!--<td>{{ getExtn(item?.file?.name) }}</td>-->
+                  <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                  <td>
+                    <div class="progress" style="">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <span *ngIf="item.isSuccess"><i class="fa fa-check" aria-hidden="true"></i></span>
+                    <span *ngIf="item.isCancel"><i class="fa fa-ban" aria-hidden="true"></i></span>
+                    <span *ngIf="item.isError"><i class="fa fa-times" aria-hidden="true"></i></span>
+                  </td>
+                  <td nowrap>
+                    <!--<button type="button" class="btn btn-success btn-xs"
+                            (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                      <span class="fa fa-check" aria-hidden="true"></span> Upload
+                    </button>
+                    <button type="button" class="btn btn-warning btn-xs"
+                            (click)="item.cancel()" [disabled]="!item.isUploading">
+                      <span class="fa fa-ban" aria-hidden="true"></span> Cancel
+                    </button>-->
+                    <span type="button" class="btn_danger btn-xs" (click)="item.remove();checkItem();">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>
+                    <!--<span type="button" class="btn btn-danger btn-xs" (click)="deleteFile()">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </span>-->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div>
+              <div class="prog">
+                Queue progress:
+                <div class="progress" style="">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                </div>
+              </div>
+              <button type="button" class="mat-raised-button btn btn btn-md btn_up"
+                      (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length || !fileUpload">
+                <span class="glyphicon glyphicon-upload"></span> Upload all
+              </button>
+              <!--<button type="button" class="btn btn-warning btn-s"
+                      (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+              </button>-->
+              <button type="button" class="mat-raised-button btn btn btn-md btn_remove"
+                      (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                <span class="glyphicon glyphicon-trash"></span> Remove all
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+
+  <!--<mat-dialog-actions>
+    <button class="mat-raised-button btn btn btn-md btn_close" (click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary btn btn-primary btn_save" (click)="save(uploader.queue.length)" [disabled]="!fileUpload || !uploadFile.valid || uploader?.queue?.length === 0" >Submit</button>
+  </mat-dialog-actions>-->
+</form>

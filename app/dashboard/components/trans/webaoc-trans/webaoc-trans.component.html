@@ -1,0 +1,187 @@
+<section class="basic_details sticky base80">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <app-trans-header></app-trans-header>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+
+
+                <div class="detail_title">
+                  <h4>
+                    <i class="icon-settings"></i><span class="user">Web AOC Transactions</span>
+                    <a [ngClass]="isOpen ? 'cmp-fa-gray pull-right marg10' : 'cmp-fa pull-right marg10'" mat-mini-fab (click)="toggle()">
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+                    </a>
+
+                  </h4>
+                </div>
+
+                <div class="container px-lg-3 my-1 p-1 bg-white rounded shadow-sm" [@openClose]="isOpen ? 'open' : 'closed'">
+                  <div class="row">
+                    <div class="form-group no-margin">
+                      <div class="col-md-10">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>Start Date</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.startDate" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+                                 autocomplete="off" placeholder="Start Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt1></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <div class="col-md-10">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>End Date</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.endDate" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" autocomplete="off" placeholder="End Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt2></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <a mat-mini-fab class="cmp-fa" (click)="gettransactions()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></a>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="container px-lg-1 my-1 p-1 bg-white rounded shadow-sm">
+                  <div fxLayout="row">
+                    <div class="data-container">
+                      <!--<div class="data-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>-->
+
+                      <div class=" data-table-container" *ngIf="dataSource.data.length > 0">
+
+                        <table mat-table [dataSource]="dataSource" matSort class="data-table" (matSortChange)="customSort($event)">
+                          <ng-container matColumnDef="id_trans" sticky>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>GTR ID</th>
+                            <td mat-cell *matCellDef="let row">{{row?.id_trans}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="sname">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE NAME</th>
+                            <td mat-cell *matCellDef="let row">{{row?.sname}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicetype">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE TYPE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.servicetype}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicegroup">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE GROUP</th>
+                            <td mat-cell *matCellDef="let row">{{row?.servicegroup}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="consenttype">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>AOC TYPE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.consenttype}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="transactiontimestamp">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>TRANS DONE ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.transactiontimestamp}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="channel">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHANNEL</th>
+                            <td mat-cell *matCellDef="let row">AOC</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="nodeip">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SRC DOMAIN / IP</th>
+                            <td mat-cell *matCellDef="let row">{{row?.nodeip}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="devicebrand">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>DEVICE MAKE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.devicebrand}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="devicemodel">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>DEVICE MODEL</th>
+                            <td mat-cell *matCellDef="let row">{{row?.devicemodel}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="devicegroup">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>OS</th>
+                            <td mat-cell *matCellDef="let row">{{row?.devicegroup}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="tmpwaocstatus">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGE STATUS</th>
+                            <td mat-cell *matCellDef="let row">{{row?.tmpwaocstatus}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="chargedamount">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGE VALUE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.chargedamount}}</td>
+                          </ng-container>
+
+                          <ng-container cdkColumnDef="actions" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
+                            <td *cdkCellDef="let row">
+                              <button matTooltip="Get Service Details" (click)="serviceGroup(row)" class="btn black mt-ladda-btn button-ladda btn-circle btn-outline btn-xs">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: { id: 'server_pagination', itemsPerPage: pageObject.pageSize, currentPage: pageObject.pageNo, totalItems: pageObject.totalRecords}"></tr>
+                        </table>
+
+                        <!--<div *ngIf="pageObject.totalRecords === 0">No records found</div>-->
+                      </div>
+                      <div class="nodata" *ngIf="dataSource.data.length === 0"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No Data Found</div>
+                      <div class=" px-lg-1 my-1 p-1 bg-white rounded shadow-sm clearfix">
+                        <div class="mt-0 pull-left">
+
+                          <div class="row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label mt-0 pr-1">Items per page</label>
+                            <div class="col-sm-3">
+                              <mat-form-field class="table-page-size">
+                                <mat-select (selectionChange)="changePageSize($event?.value)" [(ngModel)]="pageObject.pageSize" [disabled]="pageObject.totalRecords <= 0">
+                                  <mat-option *ngFor="let pgsize of pagesizes; let i = index" [value]="pgsize"
+                                              [disabled]="pageObject.totalRecords < pagesizes[i-1]">{{pgsize}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4 mt-1 text-left">
+                              {{pageObject.totalRecords <= 0 ? 0 : pageObject.pageNo}}
+                              - {{pageObject.totalRecords <= pageObject.pageSize ? pageObject.totalRecords : pageObject.pageSize}} of {{pageObject.totalRecords}}
+                            </div>
+                          </div>
+
+
+                        </div>
+                        <div class="mt-2 pull-right">
+                          <pagination-controls class="my-pagination"
+                                               (pageChange)="changePage($event)"
+                                               screenReaderCurrentLabel="You're on page"
+                                               id="server_pagination">
+                          </pagination-controls>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

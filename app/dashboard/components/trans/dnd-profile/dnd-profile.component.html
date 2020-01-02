@@ -1,0 +1,44 @@
+<div class="accounts">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 pad00">
+        <div class="header_textt">
+          <h4>
+            DND
+            <button type="button" class="btn btn-outline-primary btn_custom pull-right" (click)="adddnd()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </h4>
+        </div>
+        <table style="width:100%">
+          <thead>
+            <tr>
+              <th>CHANNEL</th>
+              <th>STATUS</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dnd of dndList | keyvalue">
+              <td>{{dnd.key}}</td>
+              <td>
+                <span *ngIf="!dnd.value" class="label label-danger"> Inctive </span>
+                <span *ngIf="dnd.value" class="label label-success"> Active </span>
+              </td>
+              <td>
+                <button type="button" class="btn btn-circle btn_cust" (click)="unblockchannel(dnd.key)">
+                  Un Block
+                </button>
+
+                <!--<button class="btn blue md-ladda-btn button-ladda btn-circle btn-outline btn-text btn-md" (click)="unblockchannel(dnd.key)">
+                  Un Block
+                </button>-->
+              </td>
+            </tr>
+            <tr *ngIf="dndList==undefined || dndList.length==0">
+              <td colspan="3">No Records Found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

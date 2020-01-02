@@ -1,0 +1,56 @@
+.accounts {
+  padding: 10px 15px;
+  padding-right: 30px;
+  background: #fff;
+  margin-top: 10px;
+}
+
+.header_textt h4 {
+  font-size: 18px;
+  border-bottom: 1px solid #3598dc;
+  color: #3598dc;
+  padding-bottom: 10px;
+  font-family: "Open Sans",sans-serif !important;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid #eaeaea;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+
+table th {
+  background: #f4f4f4;
+}
+
+.btn_custom {
+  padding: 4px 9px !important;
+  position: relative;
+  top: -5px;
+}
+.btn_cust {
+  padding: 5px;
+  border: 1px solid #3598dc;
+  width: 60px;
+  margin-top: 0px;
+  font-size: 10px;
+  color: #3598dc;
+}
+
+.place_clr::placeholder {
+  color: #d8d8d8;
+}
+
+.btn_cust:hover {
+  border-color: #3598dc;
+  color: #FFF;
+  background-color: #3598dc;
+}

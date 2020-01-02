@@ -1,0 +1,231 @@
+<section>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a> <i class="fa fa-angle-right"></i></li>
+      <li class="breadcrumb-item active" routerLink="/dashboard" aria-current="page">Profile</li>
+    </ol>
+  </nav>
+</section>
+<section class="basic_details">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="">
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="tab dsk">
+                      <div class="col-xs-4 text-center">
+                        <div class="profile-sidebar marbtm_20">
+                          <div class="portlet light profile-sidebar-portlet">
+                            <div class="profile-userpic">
+                              <img src="assets/images/avatar.png" class="img-responsive" alt="">
+                            </div>
+                            <div class="profile-usertitle">
+                              <div class="profile-usertitle-name">
+                                <h4> {{userinfo.uname}}</h4>
+                              </div>
+                              <div class="profile-usertitle-job">
+                                {{userinfo.udesignation}}
+                              </div>
+                              <div class="profile-usertitle-role">
+                                {{userinfo.urole}}
+                              </div>
+                              <div class="profile-usertitle-role">
+                                {{userinfo.dtlastlogin | date :'medium' }}
+                              </div>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-8">
+                        <div class="profile-content">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="portlet light ">
+                                <div class="portlet-title tabbable-line">
+                                  <div class="row">
+                                    <div class="col-md-5 btmborder">
+                                      <div class="caption caption-md">
+                                        <i class="icon-globe theme-font hide"></i><span class="caption-subject font-blue-madison uppercase">
+                                          Profile Account
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-7 pad0">
+                                      <ul class="nav nav-tabs small justify-content-end">
+                                        <li class="nav-item">
+                                          <a (click)="displayTab('info')" class="nav-link" [ngClass]="{'active': showuserInfo === true }" data-toggle="tab">Personal Info</a>
+                                        </li>
+                                        <li class="nav-item"><a (click)="displayTab('pwd')" class="nav-link" [ngClass]="{'active': showpwdInfo === true }" data-toggle="tab">Change Password</a> </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="portlet-body">
+                                  <div class="tab-content">
+                                    <!-- PERSONAL INFO TAB -->
+                                    <div class="tab-pane container active" *ngIf="showuserInfo" [ngClass]="{'active': showuserInfo === true }">
+                                      <form role="form" action="#">
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="form_control_f1" *ngIf="uusertype=='1010006' || uusertype=='1010007' ">
+                                                Name/Partner Id *
+                                              </label>
+                                              <label for="form_control_f1" *ngIf="uusertype!='1010006' && uusertype!='1010007' ">
+                                                Name*
+                                              </label>
+                                              <div class="form-control form-control-static"><span>{{userinfo.uname}}</span> </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="form_control_f4"> Login Id * </label>
+                                              <div class="form-control form-control-static"><span>{{userinfo.uloginid}}</span> </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="txtemail"> Email*</label>
+                                              <input type="text" class="form-control" id="uemail" name="uemail" #uemail="ngModel"
+                                                     [(ngModel)]="userinfo.uemail" maxlength="100" [disabled]="enableedit==false" required />
+                                              <div *ngIf="uemail.invalid && (uemail.dirty || uemail.touched)" class="err">
+                                                <div *ngIf="uemail.errors.required">
+                                                  * Email is required.
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="form_control_f3"> Mobile No* </label>
+                                              <input type="text" class="form-control" id="umobileno" name="umobileno" #umobileno="ngModel"
+                                                     [(ngModel)]="userinfo.umobileno"
+                                                     numbersOnly maxlength="12" [disabled]="enableedit==false" required />
+
+                                              <div *ngIf="umobileno.invalid && (umobileno.dirty || umobileno.touched)" class="err">
+                                                <div *ngIf="umobileno.errors.required">
+                                                  * Mobile Number is required.
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="lang">Language*</label>
+                                              <select class="form-control" placeholder="select" id="languageid" name="languageid" #languageid="ngModel" [(ngModel)]="userinfo.languageid" required>
+                                                <option *ngFor="let item of langlist" value="{{item.value}}">{{item.name}}</option>
+                                              </select>
+
+                                              <div *ngIf="languageid.invalid && (languageid.dirty || languageid.touched)" class="err">
+                                                <div *ngIf="languageid.errors.required">
+                                                  * Language is required.
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-primary"
+                                                    (click)="UpdateUser()">
+                                              Submit
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <div class="tab-pane container" *ngIf="showpwdInfo" [ngClass]="{'active': showpwdInfo === true }">
+                                      <form role="form" action="#" autocomplete="off" method="post">
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="txtoldpwd">Old Password*</label>
+                                              <input type="password" class="form-control form-textbox" name="oldpassword" id="oldpassword"
+                                                     autocomplete="off" [(ngModel)]="pwdinfo.oldpassword" required #oldpassword="ngModel" />
+
+                                              <div *ngIf="oldpassword.invalid && (oldpassword.dirty || oldpassword.touched)" class="err">
+                                                <div *ngIf="oldpassword.errors.required">
+                                                  * Old password is required.
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="txtnewpwd">New Password*</label>
+                                              <input type="password" class="form-control form-textbox" name="newpassword" id="newpassword"
+                                                     [(ngModel)]="pwdinfo.newpassword" #newpassword="ngModel" required autocomplete="off" />
+                                              <div *ngIf="newpassword.invalid && (newpassword.dirty || newpassword.touched)" class="err">
+                                                <div *ngIf="newpassword.errors.required">
+                                                  * New password is required.
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <div class="form-group form-md-line-input">
+                                              <label for="txtrnewpwd">Confirm Password*</label>
+                                              <input type="password" name="rnewpassword" id="rnewpassword" class="form-control form-textbox" required
+                                                     autocomplete="off" [(ngModel)]="pwdinfo.rnewpassword" #rnewpassword="ngModel" />
+
+                                              <div *ngIf="rnewpassword.invalid && (rnewpassword.dirty || rnewpassword.touched)" class="err">
+                                                <div *ngIf="rnewpassword.errors.required">
+                                                  * Confirm password is required.
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-primary"
+                                                    (click)="UpdatePwd()">
+                                              Submit
+                                            </button>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-12">
+                                            <hr />
+                                            <div class="alert alert-info">
+                                              <!--<button type="button" class="closeNote"></button>-->
+                                              <div [innerHTML]="pwdPolicy">
+                                              </div>
+                                              <!--<p>
+                                                {{pwdPolicy}}
+                                              </p>-->
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- END PERSONAL INFO TAB -->
+                              <!-- CHANGE PASSWORD TAB -->
+                              <!-- END CHANGE PASSWORD TAB -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

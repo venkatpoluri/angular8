@@ -1,0 +1,44 @@
+.mesg-description {
+  font-size: 15px;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  margin-top: 18px;
+}
+.alert-body h4 {
+  text-align: center;
+  font-weight: normal;
+  padding-bottom: 20px;
+}
+.msg-icon {
+  font-size: 30px !important;
+  text-align: center !important;
+  padding-top: 8px !important;
+  display: block;
+  border-radius: 40px;
+  width: 50px !important;
+  height: 50px !important;
+  margin: 0 auto;
+}
+.border-error {
+  border: 1px solid #e7505a;
+  color: #e7505a !important;
+}
+.border-warning {
+  border: 1.5px solid #ffc107;
+  color: #ffc107 !important
+}
+.border-success {
+  border: 1px solid #4caf50;
+  color: #4caf50 !important;
+}
+.close-custom {
+  border: 1px solid #7f8182;
+  background: #7f8182;
+  border-color: #7f8182;
+  color: #fff;
+  margin: 0 auto;
+  display: block;
+  border-radius: 4px;
+  outline: none;
+}

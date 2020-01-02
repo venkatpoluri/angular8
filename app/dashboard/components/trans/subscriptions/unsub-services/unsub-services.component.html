@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>UNSUBSCRIBE</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container px-lg-1 my-1 p-1 bg-white rounded shadow-sm">
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field floatLabel="always">
+          <mat-label>Type</mat-label>
+          <mat-select name="channels" [(ngModel)]="unsubobj.unsubtype"  disabled="true">
+            <mat-option value="1">Selected Services</mat-option>
+            <mat-option value="2">Service Group</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field floatLabel="always">
+          <mat-label>Service Group</mat-label>
+          <mat-select name="service_group" (selectionChange)="getServiceGroupPartner($event?.value)" [(ngModel)]="unsubobj.servicegroup">
+            <mat-option value="0">Select</mat-option>
+            <mat-option *ngFor="let item of unsubobj.servicegrplist" [value]="item?.id">{{ item?.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field floatLabel="always">
+          <mat-label>Partners</mat-label>
+          <mat-select name="partner" [(ngModel)]="unsubobj.partner">
+            <mat-option value="0">All</mat-option>
+             <mat-option *ngFor="let item of unsubobj.partnerlist" [value]="item?.id">{{ item?.name }}</mat-option> 
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field floatLabel="always">
+          <mat-label>Language</mat-label>
+          <mat-select name="language" (selectionChange)="onChangeLanguage()" [(ngModel)]="unsubobj.language">
+            <mat-option value="">Select</mat-option>
+            <mat-option *ngFor="let item of languages" [value]="item?.value">{{ item?.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field floatLabel="always">
+          <mat-label>UnSubscription Type</mat-label>
+          <mat-select name="unsubmode" [(ngModel)]="unsubobj.unsubmode">
+            <mat-option value="0">Select</mat-option>
+            <mat-option value="1">UnSubscribe Immediately</mat-option>
+            <mat-option value="0">Go by Product Definiton</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <mat-form-field floatLabel="always">
+          <mat-label>Reason Code</mat-label>
+          <mat-select name="reasoncode" (selectionChange)="SetReasonMessage()" [(ngModel)]="unsubobj.reasoncode">
+            <mat-option value="0">Select</mat-option>
+            <mat-option *ngFor="let item of unsubobj.reasoncodelist" [value]="item?.vcreasoncode">{{item?.vcreason}} ({{item?.vcreasoncode}})</mat-option> 
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12" floatLabel="always">
+        <mat-label>Comments</mat-label>
+        <mat-form-field class="example-full-width">
+          <textarea name="reasonmsg" [(ngModel)]="unsubobj.reasonmsg" matInput></textarea>
+        </mat-form-field>
+      </div>
+      </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button type="button" mat-button (click)="unsubscribeserviceslist()" cdkFocusInitial>Unsubscribe</button>
+</mat-dialog-actions>

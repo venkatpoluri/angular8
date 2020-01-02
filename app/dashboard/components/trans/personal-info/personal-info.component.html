@@ -1,0 +1,74 @@
+<div class="accounts">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 pad00">
+        <div class="header_textt">
+          <h4> {{'PERSONAL INFO'| langFilter}} </h4>
+        </div>
+        <form  novalidate (ngSubmit)="onSubmit(personalForm.value)" autocomplete="off">
+          <div class="inner_sections">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field>
+                  <mat-label>{{'First Name'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.fname}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field>
+                  <mat-label>{{'Last Name'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.lname}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Gender'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.gender}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Nationality'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.nationality}}" disabled>
+
+                </mat-form-field>
+              </div>
+             
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Date Of Birth'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off"    value="{{accountinfo?.subscriber?.birthDate}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Id Number'| langFilter}}</mat-label> <!--{{accountinfo.addInfo.idNum}}-->
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.addInfo?.idNum}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Id Type'| langFilter}}</mat-label><!--{{accountinfo.addInfo.idType}}-->
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.addInfo?.idType}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Language'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{language}}" disabled>
+
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

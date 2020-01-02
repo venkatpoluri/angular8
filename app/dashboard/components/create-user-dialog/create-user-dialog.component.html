@@ -1,0 +1,153 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<hr />
+<form autocomplete="off" name="addUserForm" novalidate #addUserForm='ngForm'>
+  <mat-dialog-content>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label> {{'Name'| langFilter}}</mat-label>
+            <input matInput type="text" [(ngModel)]="userobj.uname" name="uname"  #uname="ngModel" maxlength="50" required autocomplete="off">
+            <mat-error>
+              <div *ngIf="uname.invalid && (uname.dirty || uname.touched)">
+                <div *ngIf="uname.errors.required">Name is required.</div>
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label> {{'User Type'| langFilter}}</mat-label>
+            <mat-select [(ngModel)]="userobj.uusertype" (change)="GetSps()" name="uusertype"  #uusertype="ngModel" required   [disabled]="mode =='update'">
+              <mat-option *ngFor="let item of rolesList" value="{{item.id}}">{{item.name}}</mat-option>
+            </mat-select>
+            <mat-error>
+              <div *ngIf="uusertype.invalid && (uusertype.dirty || uusertype.touched)">
+                <div *ngIf="uusertype.errors.required">User type is required.</div>
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <mat-form-field>
+            <mat-label> {{'Status'| langFilter}}</mat-label>
+            <mat-select [(ngModel)]="userobj.status" name="status" required #status="ngModel">
+              <mat-option value="1">Active</mat-option>
+              <mat-option value="0">Inactive</mat-option>
+            </mat-select>
+            <mat-error>
+              <div *ngIf="status.invalid && (status.dirty || status.touched)">
+                <div *ngIf="status.errors.required">Status is required.</div>
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label> {{'Email'| langFilter}}</mat-label>
+            <input matInput placeholder="" [(ngModel)]="userobj.uemail" autocomplete="off" allow-pattern="[a-zA-Z\s.@_-\b]" type="email" name="uemail" #uemail="ngModel" required>
+            <mat-error>
+              <div *ngIf="uemail.invalid && (uemail.dirty || uemail.touched)">
+                <div *ngIf="uemail.errors.required">Email Address is required.</div>
+                <div [hidden]="!uemail.errors.pattern">Invalid Email Address </div>
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field>
+            <mat-label> {{'Mobile No'| langFilter}}</mat-label>
+            <input matInput type="tel" placeholder="" [(ngModel)]="userobj.umobileno" name="umobileno" #umobileno="ngModel"
+                   required (keydown)="check($event)" maxlength="11" autocomplete="off">
+            <mat-error>
+              <div *ngIf="umobileno.invalid && (umobileno.dirty || umobileno.touched)">
+                <div *ngIf="umobileno.errors.required">Mobile Number is required.</div>
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label> {{'Department'| langFilter}}</mat-label>
+            <input matInput placeholder="" [(ngModel)]="userobj.udepartment" autocomplete="off" name="udepartment" #udepartment="ngModel">
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label> {{'Designation'| langFilter}}</mat-label>
+            <input matInput [(ngModel)]="userobj.udesignation" autocomplete="off" name="udesignation" #udesignation="ngModel">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label> {{'Login Id'| langFilter}}</mat-label>
+            <input matInput autocomplete="off" [(ngModel)]="userobj.uloginid" name="uloginid" #uloginid="ngModel" [disabled]="mode =='update'" required
+                   allow-pattern="[a-zA-Z0-9._@$\s\b]" maxlength="100" />
+            <mat-error>
+              <div *ngIf="uloginid.invalid && (uloginid.dirty || uloginid.touched)">
+                <div *ngIf="uloginid.errors.required">Login Id is required.</div>
+                <div [hidden]="!uloginid.errors.pattern">Invalid Login Id</div>
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field *ngIf="!buadmin" id="divsps">
+            <mat-label> {{'Bussiness Unit'| langFilter}}</mat-label>
+            <mat-select [(ngModel)]="userobj.usp" name="usp" #usp="ngModel" [disabled]="mode =='update'">
+              <mat-option *ngFor="let item of buunits" value="{{item.id}}">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6" *ngIf="isbuadmin">
+          <mat-form-field>
+            <mat-label> {{'Operators'| langFilter}}</mat-label>
+            <mat-select [(ngModel)]="userobj.operators" name="operators" #operators="ngModel">
+              <mat-option *ngFor="let item of OperatorsList" value="{{item.operatorid}}">{{item.operator}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label>{{'Service Group'| langFilter}}</mat-label>
+            <mat-select [(ngModel)]="userobj.selectedservicegroups" name="selectedservicegroups" #selectedservicegroups="ngModel" multiple  [compareWith]="compareWithFunc">
+              <mat-option *ngFor="let item of servicegrouplist" value="{{item.id}}">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <hr />
+      <h6>Access Details</h6>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row" *ngFor="let atype of authtypelist">
+            <div class="col-sm-3">
+              <mat-checkbox [(ngModel)]="atype.istatus" (change)="atype.istatus=($event.checked)" id="chk_{{atype.authtype}}" name="{{atype.authtype}}">{{atype.authtype}}</mat-checkbox>
+            </div>
+            <div class="col-sm-9">
+              <mat-form-field>
+                <mat-label>Login ID*</mat-label>
+                <input matInput placeholder="" [(ngModel)]="atype.authloginid" name="{{atype.authtype}}" id="txt_{{atype.authtype}}" type="text" autocomplete="off" allow-pattern="[a-zA-Z0-9._@$\s\b]" maxlength="100">
+                <mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="pull-right">
+    <button class="mat-raised-button" (click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary" type="button" (click)="submitUser()">Submit</button>
+  </mat-dialog-actions>
+</form>

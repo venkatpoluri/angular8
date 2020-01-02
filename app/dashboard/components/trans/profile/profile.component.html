@@ -1,0 +1,65 @@
+
+<section class="basic_details sticky">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <app-trans-header></app-trans-header>
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+                <div class="row">
+                  <div class="col-3 padright10">
+
+                    <!--<div class="col-12 pad0">
+                      <div class="account_info">
+                        <h5> {{accountinfo._id}}</h5>
+                        <div>
+                          <ul>
+                            <li>ACCOUNT NO:</li>
+                            <li>{{accountinfo.subscriber.accId}}</li>
+                          </ul>
+                          <ul>
+                            <li>STATUS:</li>
+                            <li>
+                              <span class="label label-danger" *ngIf="accountinfo.subscriber.state== '0'">InActive</span>
+                              <span class="label label-success" *ngIf="accountinfo.subscriber.state== '1'">Active</span>
+                              <span class="label label-warning" *ngIf="accountinfo.subscriber.state== '2'">OnHold</span>
+                              <span class="label label-warning" *ngIf="accountinfo.subscriber.state== '4'">Closed</span>
+                            </li>
+                          </ul>
+                          <ul>
+                            <li>UPDATED ON:</li>
+                            <li>
+                              {{accountinfo.subscriber.updatedOn}}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>-->
+                    <div class="col-12 pad0 margtop10">
+                      <ul class="tabs_sec">
+                         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  routerLink="/dashboard/profile/accountinfo"><a >Account Info</a></li>
+                         <li routerLinkActive="active" routerLink="/dashboard/profile/personalinfo"><a>Personal Info</a></li>
+                         <li routerLinkActive="active" routerLink="/dashboard/profile/blocklist"><a>Block List</a></li>
+                         <li routerLinkActive="active" routerLink="/dashboard/profile/whitelist"><a>White List</a></li>
+                         <li routerLinkActive="active" routerLink="/dashboard/profile/dnd"><a>DND</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-9 pad00 clr_white">
+                   <router-outlet></router-outlet>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</section>
+
+
+
+
+

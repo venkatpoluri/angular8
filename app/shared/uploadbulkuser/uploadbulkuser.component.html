@@ -1,0 +1,12 @@
+<div class="confirm-modal">
+  <h4>Confirm <i class="fa fa-exclamation-circle"></i></h4>
+  <hr />
+  <mat-dialog-content class="mat-typography">
+    <h3>{{data.msg}}</h3>
+  </mat-dialog-content>
+  <hr />
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial class="confirm-cancel">Cancel</button>
+    <button mat-button [mat-dialog-close]="true" class="confirm-ok">Yes</button>
+  </mat-dialog-actions>
+</div>

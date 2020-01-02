@@ -1,0 +1,222 @@
+<div class="accounts">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 pad00">
+        <div class="header_textt">
+          <h4>{{'ACCOUNT INFO'| langFilter}}</h4>
+        </div>
+        <form novalidate (ngSubmit)="onSubmit(accountForm.value)" autocomplete="off">
+          <div class="inner_sections">
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Account No'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.accId}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Mobile No'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?._id}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Virtual Mobile No'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.vmsisdn}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'IMSI'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.imsi}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'IMEI'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.imei}}" disabled>
+
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Network Type'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{opid}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Subscriber Class'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{userClass}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Billing Plan'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.subOpPln}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Monthly Billing Day'| langFilter}} </mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.billDay}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Subscriber Type'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{userType}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Coprorate Id'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.corpId}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3" *ngIf="disablemobile">
+                <mat-form-field>
+                  <mat-label> {{'Parent Mobile No'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.parentPhn}}" name="txtparentPhn" ng-show="!enableeditmobile" disabled />
+                  <!--<input matInput type="text" autocomplete="off" [(ngModel)]="tmpparentphone"  name="txtparentPhn"  ng-show="enableeditmobile" id="txtmmsisdn" maxlength="13" allow-pattern="[0-9\s\b]">-->
+                </mat-form-field>
+              </div>
+              <div class="col-md-1" *ngIf="disablemobile">
+                <button type="button" class="btn btn-outline-primary btn_custom" (click)="editlanguage('mobile')"><i class="fa fa-edit" aria-hidden="true"></i></button>
+              </div>
+              <div class="col-md-3" *ngIf="enableeditmobile">
+                <mat-form-field>
+                  <mat-label> {{'Parent Mobile No'| langFilter}}</mat-label>
+                  <!--<input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.parentPhn}}" name="txtparentPhn" ng-show="!enableeditmobile" disabled />-->
+                  <input matInput type="text" autocomplete="off" [(ngModel)]="tmpparentphone"  name="txtparentPhn" id="txtmmsisdn" maxlength="13" allow-pattern="[0-9\s\b]">
+                </mat-form-field>
+              </div>
+              <div class="col-md-1 p-0" *ngIf="enableeditmobile">
+                <button type="button" class="btn btn-outline-primary btn_custom" (click)="updatechannellanguage('mobile',tmpparentphone)"><i class="fa fa-save" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-outline-primary btn_custom ml-1" (click)="cancellanguage('mobile')"><i class="fa fa-close" aria-hidden="true" ></i></button>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'First Switch On Date Time'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.fstSwtchOnDt}}" disabled>
+                </mat-form-field>
+
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Termination Date Time'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.swtchOffDt}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'Termination Reason Code'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.swtchOffRsnCde}}" disabled>
+                </mat-form-field>
+              </div>
+
+
+              <div class="col-md-12">
+                <mat-form-field>
+                  <mat-label> {{'Termination Reason'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.swtchOffRsnCde}}" disabled>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="header_textt">
+            <h4>CHANNEL LANGUAGE</h4>
+          </div>
+          <div class="inner_sections">
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'SMS Language'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{smsLang}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'IVR Language'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{ivrLang}}" disabled>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label> {{'Call Center Language'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{ccLang}}" disabled>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="header_textt">
+            <h4>FLAGS</h4>
+          </div>
+          <div class="inner_sections">
+            <div class="row">
+              <div class="col-md-3" *ngIf="disablevip">
+                <mat-form-field>
+                  <mat-label> {{'DPDP VIP Flag'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo.subscriber.vip ? 'Enabled' : 'Disabled'}}"  ng-show="!enableeditvip" disabled />
+                </mat-form-field>
+              </div>
+              <div class="col-md-1" *ngIf="disablevip">
+                <button type="button" class="btn btn-outline-primary btn_custom" (click)="editlanguage('vip')"><i class="fa fa-edit" aria-hidden="true"></i></button>
+              </div>
+              <div class="col-md-3" *ngIf="enableeditvip">
+                <mat-form-field>
+                  <mat-label> {{'DPDP VIP Flag'| langFilter}}</mat-label>
+                  <mat-select [(ngModel)]="tmpvipflag" name="txttmpvipflag" #txttmpvipflag="ngModel" (change)="changelang(tmpvipflag,'vip')">
+                    <mat-option [value]="false">Disabled</mat-option>
+                    <mat-option [value]="true">Enabled</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-1 p-0" *ngIf="enableeditvip">
+                <button type="button" class="btn btn-outline-primary btn_custom" (click)="updatechannellanguage('vip')"><i class="fa fa-save" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-outline-primary btn_custom ml-1" (click)="cancellanguage('vip')"><i class="fa fa-close" aria-hidden="true"></i></button>
+              </div>
+
+              <div class="col-md-3" *ngIf="disablerisk">
+                <mat-form-field>
+                  <mat-label> {{'Risk Flag'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo.subscriber.risk ? 'Enabled' : 'Disabled'}}"  ng-show="!enableeditrisk" disabled />
+                </mat-form-field>
+              </div>
+              <div class="col-md-1" *ngIf="disablerisk">
+                <button type="button" class="btn btn-outline-primary btn_custom" (click)="editlanguage('risk')"><i class="fa fa-edit" aria-hidden="true"></i></button>
+              </div>
+              <div class="col-md-3" *ngIf="enableeditrisk">
+                <mat-form-field>
+                  <mat-label> {{'Risk Flag'| langFilter}}</mat-label>
+                  <mat-select [(ngModel)]="tmpriskflag" name="txttmpriskflag" #txttmpriskflag="ngModel" (change)="changelang(tmpriskflag,'risk')">
+                    <mat-option [value]="false">Disabled</mat-option>
+                    <mat-option [value]="true">Enabled</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-1 p-0" *ngIf="enableeditrisk">
+                <button type="button" class="btn btn-outline-primary btn_custom" (click)="updatechannellanguage('risk')"><i class="fa fa-save" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-outline-primary btn_custom ml-1" (click)="cancellanguage('risk')"><i class="fa fa-close" aria-hidden="true"></i></button>
+              </div>
+
+            
+              <div class="col-md-4">
+                <mat-form-field>
+                  <mat-label>{{'DND Flag'| langFilter}}</mat-label>
+                  <input matInput type="text" autocomplete="off" value="{{accountinfo?.subscriber?.dndflag ? 'Enabled' : 'Disabled'}}" disabled>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

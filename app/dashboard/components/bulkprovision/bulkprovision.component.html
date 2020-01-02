@@ -1,0 +1,147 @@
+<section class="basic_details sticky base80">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <app-trans-header></app-trans-header>
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+                <div class="detail_title">
+                  <h4>
+                    <i class="icon-settings"></i><span class="user">Bulk Provision</span>
+                    <a href="javascript:void(0)" data-target="#addprovision" ng-if="permission.add=='1'" data-toggle="modal" ng-click="addProvision()" class="btn blue mt-ladda-btn ladda-button btn-circle btn-outline pull-right marg10">
+                      <i class="fa fa-plus"></i>
+                    </a>
+                  </h4>
+                </div>
+                <div class="container px-lg-3 my-1 p-1 bg-white rounded shadow-sm" [@openClose]="isOpen ? 'open' : 'closed'">
+                  <div class="row">
+                    <div class="form-group no-margin">
+                      <div class="col-md-10">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>Start Datetime</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.startDate" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+                                 autocomplete="off" placeholder="Start Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt1></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <div class="col-md-10">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>End Datetime</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.endDate" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" autocomplete="off" placeholder="End Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt2></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <mat-form-field floatLabel="always">
+                        <mat-label>Status</mat-label>
+                        <mat-select name="service_group" [(ngModel)]="servicegroup" (change)="LoadPartners()">
+                          <mat-option value="">All</mat-option>
+                          <mat-option value="">Draft</mat-option>
+                          <mat-option value="">In Progress</mat-option>
+                          <mat-option value="">Success</mat-option>
+                          <mat-option value="">Failure</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <a mat-mini-fab class="cmp-fa" (click)="LoadProvisions();"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></a>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="container px-lg-1 my-1 p-1 bg-white rounded shadow-sm">
+                  <div fxLayout="row">
+                    <div class="data-container">
+                      <div class="data-loading-shade" *ngIf="isLoadingResults">
+                        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+                      </div>
+
+                      <div class="data-table-container">
+
+                        <table mat-table [dataSource]="dataSource" matSort class="data-table" (matSortChange)="customSort($event)">
+                          <ng-container matColumnDef="id" sticky>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                            <td mat-cell *matCellDef="let row">{{row?.id}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+                            <td mat-cell *matCellDef="let row">{{row?.name}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>TYPE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.type}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="charging">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGING</th>
+                            <td mat-cell *matCellDef="let row">{{row?.charging}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="uploadedby">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>UPLOADED BY</th>
+                            <td mat-cell *matCellDef="let row">{{row?.uploadedby}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="createddate">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CREATED ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.createddate}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+                            <td mat-cell *matCellDef="let row">{{row?.status}}</td>
+                          </ng-container>
+
+                          <!--<ng-container matColumnDef="sessionid">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SessionId</th>
+                            <td mat-cell *matCellDef="let row">{{row?.sessionid}}</td>
+                          </ng-container>-->
+
+                          
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: { id: 'bulkprovision_pagination', itemsPerPage: pageObject.pageSize, currentPage: pageObject.pageNo, totalItems: pageObject.totalRecords}"></tr>
+                        </table>
+
+                        <!--<div *ngIf="pageObject.totalRecords === 0">No records found</div>-->
+                      </div>
+                      <div class=" px-lg-1 my-1 p-1 bg-white rounded shadow-sm">
+                        <div class="mt-2">
+                          <pagination-controls class="my-pagination"
+                                               (pageChange)="changePage($event)"
+                                               screenReaderCurrentLabel="You're on page"
+                                               id="bulkprovision_pagination">
+                          </pagination-controls>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+

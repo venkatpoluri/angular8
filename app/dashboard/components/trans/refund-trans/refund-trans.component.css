@@ -1,0 +1,65 @@
+
+/* Structure */
+.data-container {
+  position: relative;
+  min-height: 200px;
+}
+
+.data-table-container {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.data-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+th.mat-column-gtrid, td.mat-column-gtrid {
+  padding-left: 8px;
+}
+
+.mat-table-sticky:first-child {
+  border-right: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky:last-child {
+  border-left: 1px solid #e0e0e0;
+}
+
+
+.mat-column-actions {
+  flex: 0 0 25% !important;
+  min-width: 80px !important;
+  padding-right: 8px;
+}
+
+
+.mat-column-message {
+  flex: 0 0 25% !important;
+  min-width: 180px !important;
+}
+.mat-column-servicename_es, .mat-column-charged_on, .mat-column-charged_price, .mat-column-charge_requested_channel, .mat-column-refund_date, .mat-column-status, .mat-column-refund_type, .mat-column-refund_amount, .mat-column-refund_reason_code, .mat-column-refund_description, .mat-column-error_description, .mat-column-agent_name {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}

@@ -1,0 +1,81 @@
+<section>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a> <i class="fa fa-angle-right"></i></li>
+      <li class="breadcrumb-item active" aria-current="page">Bulk Provision</li>
+    </ol>
+  </nav>
+</section>
+<section class="basic_details">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <div class="detail_title">
+            <h4>
+              <i class="icon-settings"></i><span class="user">Bulk Provision</span>
+
+              <a class="btn blue mt-ladda-btn ladda-button btn-circle btn-outline pull-right marright_5 ng-scope" (click)="bulkuploaddialog()" title="Add Agents">
+                <i class="fa fa-plus">
+                </i>
+              </a>
+
+            </h4>
+          </div>
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="tab dsk">
+
+                      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                        <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>User Type</th>
+                            <th>File Name</th>
+                            <th>Created on</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let user of bulkuserlist">
+                            <td> {{user.iid}}</td>
+                            <td>
+                              <span [ngSwitch]="user.biusertype">
+                                <span *ngSwitchCase='1010012'>Sub Customer Care</span>
+                                <span *ngSwitchCase='1010013'></span>
+                              </span>
+                            </td>
+
+                            <td>{{user.vcfilename}}</td>
+                            <td>{{user.dtcreatedon}}</td>
+                            <td>
+                              <h6 [ngSwitch]="user.sistatus">
+                                <span class="badge badge-light" *ngSwitchCase='-1'>Initial state</span>
+                                <span class="badge badge-warning" *ngSwitchCase='1'>Processing</span>
+                                <span class="badge badge-success" *ngSwitchCase='2'>Processed</span>
+                                <span class="badge badge-danger" *ngSwitchCase='7'>Unzipping failed</span>
+                                <span class="badge badge-light" *ngSwitchCase='8'>Unzipping failed</span>
+
+                                &nbsp;&nbsp;<a *ngSwitchCase='2' (click)="ShowgraphPopup(user.iid)" class='btn btn-outline-info btn-sm'><i class="fa fa-bar-chart showstats"></i></a>
+                              </h6>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                     
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

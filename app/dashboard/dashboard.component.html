@@ -1,0 +1,147 @@
+<!--<app-header></app-header>-->
+<!-- <div class="row">
+  <div class="col-md-1">
+    <p>sidenav</p>
+  </div>
+  <div class="col-md-11">
+    <router-outlet></router-outlet>
+  </div>
+</div> -->
+
+
+
+
+
+<!--header with side nav starts here-->
+<div class="header">
+  <a id="menu-action">
+    <!-- <i class="fa fa-bars"></i> -->
+    <span class="img_logo"><img src="assets/images/logo.png"></span>
+  </a>
+  <div class="logo">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="logo">
+            <img src="assets/images/logo-default.png">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="profile">
+         
+
+            <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
+            <div class="dropdown" style="float:right;">
+              <button class="dropbtn"><img src="../../assets/images/avatar.png" /><span>Superadmin</span></button>
+              <div class="dropdown-content">
+                <a routerLink="/dashboard/myprofile"><i class="icon-user"></i>My Profile</a>
+                <!--<a href="#" (click)="logout()"><i class="mdi mdi-logout"></i>Logout</a>-->
+                <button type="button" class="btn btn-outline-primary btn_c" (click)="logout()">Logout</button>
+              </div>
+            </div>
+         
+            <!--<div class="half">
+    <label for="profile2" class="profile-dropdown">
+      <input type="checkbox" id="profile2">
+      <img src="https://cdn0.iconfinder.com/data/icons/avatars-3/512/avatar_hipster_guy-512.png">
+      <label for="profile2"><i class="mdi mdi-menu"></i></label>
+      <ul>
+        <li><a routerLink="/dashboard/myprofile"><i class="mdi mdi-email-outline"></i>Profile</a></li>
+        <li><a href="#" (click)="logout()"><i class="mdi mdi-logout"></i>Logout</a></li>
+      </ul>
+    </label>
+
+  </div>-->
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="sidebar" id="style-7">
+  <ul>
+    <!--<li routerLinkActive="active-link" routerLink="/dashboard">
+    <a>
+      <i class="icon-home"></i>
+      <span class="title">Dashboard</span>
+      <span class="selected"></span>
+    </a>
+  </li>-->
+    <li>
+      <a routerLinkActive="active-link" routerLink="/dashboard/ccindex"><i class="icon-customer-care"></i><span class="title">Customer Care</span></a>
+      <!--<ul class="sub-menu dropup"></ul>-->
+    </li>
+
+    <li>
+      <a routerLinkActive="active-link" routerLink="/dashboard/userslist"><i class="icon-people"></i><span class="title">User Management</span></a>
+      <ul class="sub-menu dropup">
+        <!--<li><a><span class="title"></span></a></li>-->
+        <!--<li><a routerLinkActive="active-link" routerLink="/dashboard/bulkuserlist"><span class="title_sub">Upload Users</span></a></li>-->
+        <li><a routerLinkActive="active-link" routerLink="/dashboard/managerights"><span class="title_sub">Rights Management</span></a></li>
+
+      </ul>
+    </li>
+
+
+
+    <li> <a><i class="icon-messaging-gateway"></i><span class="title">Bulk Provision</span></a></li>
+    <li> <a><i class="icon-refund"></i><span class="title">Refund WorkFlow</span></a></li>
+    <li>
+      <a><i class="icon-supporting"></i><span class="title">Support</span></a>
+      <ul class="sub-menu dropup">
+        <li><a routerLinkActive="active-link" routerLink="/dashboard/auditlogs"><span class="title_sub">Audit Logs</span></a></li>
+        <li><a routerLinkActive="active-link" routerLink="/dashboard/gtridtrans"><span class="title_sub">GTRID TRANSACTIONS</span></a></li>
+
+      </ul>
+    </li>
+
+    <!--<li>
+    <a><i class="icon-settings"></i><span class="title">Settings</span></a>
+    <ul class="sub-menu dropup">
+      <li><a><span class="title_sub">Service Charge Config</span></a></li>
+      <li><a><span class="title_sub">Notification Mails</span></a></li>
+
+    </ul>
+  </li>
+  <li> <a><i class="fa fa-film"></i><span class="title">DIY Content</span></a></li>-->
+
+
+  </ul>
+</div>
+<!--header with side nav ends here-->
+<!--main-->
+
+
+<main class="main" style="height:100%;">
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<!--main section-->
+<!--footer-->
+
+<footer class="page_bottom">
+  <div class="page-footer">
+    <div class="container-fluid">
+      <div class="page-footer-inner pull-left" style="padding-left: 40px">
+        © 2018 Telenor Group
+        <br>
+        <span style="font-size: 8px;">Min Resolution: 1024 x 768 pixels  |  Supported Browsers : Chrome / Internet Explorer (Version 10.0+) &amp; above / Mozilla Firefox (version 26+) &amp; above</span>
+      </div>
+      <div class="page-footer-inner pull-right">
+        <span>Powered By </span><a target="_blank" href="#"><img height="15px" style="margin-top: -10px" src="https://imimobile.com/app/themes/diet-unicorn/assets/img/header/logo-desktop.svg"></a>
+        <div class="scroll-to-top">
+          <!--<i class="icon-arrow-up"></i>-->
+        </div>
+      </div>
+    </div>
+  
+
+  </div>
+</footer>
+<!--footer ends here-->

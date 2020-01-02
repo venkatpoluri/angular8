@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+  <div class="alert-body">
+    <span>
+      <i class="fa fa-check msg-icon border-success" *ngIf="data.type === 'success'"></i>
+      <i class="fa fa-close msg-icon border-error" *ngIf="data.type === 'error'"></i>
+      <i class="fa fa-close msg-icon border-warning" *ngIf="data.type === 'warning'"></i>
+    </span>
+    <div *ngIf="data.html; else notHtml" style="min-height:150px;">
+      <div [innerHTML]="data.msg">
+      </div>
+    </div>
+    <ng-template #notHtml>
+      <p class="mesg-description">{{data.msg}}</p>
+    </ng-template>
+ 
+    <hr />
+    <button mat-stroked-button class="close-custom" (click)="close()" cdkFocusInitial>Close</button>
+  </div>
+</div>

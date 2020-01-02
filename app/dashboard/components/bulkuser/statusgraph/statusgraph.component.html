@@ -1,0 +1,25 @@
+ 
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Total</th>
+          <th>Success</th>
+          <th>Failed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{statusdata.itotalcount}}</td>
+          <td>{{statusdata.isuccesscount}}</td>
+          <td>{{statusdata.ifailedcount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-stroked-button color="warn" mat-dialog-close>Close</button>
+</mat-dialog-actions>
+

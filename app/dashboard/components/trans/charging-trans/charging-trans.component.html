@@ -1,0 +1,258 @@
+<section class="basic_details sticky base80">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <app-trans-header></app-trans-header>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+
+
+                <div class="detail_title">
+                  <h4>
+                    <i class="icon-settings"></i><span class="user">Charging Transactions</span>
+                    <button type="button" [ngClass]="isOpen ? 'btn btn-outline-grey btn_custom1 pull-right marg10' : 'btn btn-outline-primary btn_custom1 pull-right marg10'" (click)="toggle()">
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+                    </button>
+
+                    <!--<a [ngClass]="isOpen ? 'cmp-fa-gray pull-right marg10' : 'cmp-fa pull-right marg10'" mat-mini-fab (click)="toggle()">
+    <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+    <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+  </a>-->
+
+                  </h4>
+                </div>
+
+                <div class="container px-lg-3 my-1 p-1 bg-white rounded shadow-sm" [@openClose]="isOpen ? 'open' : 'closed'">
+                  <div class="row">
+                    <div class="form-group no-margin">
+                      <div class="col-md-12">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>Start Date</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.startDate" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+                                 autocomplete="off" placeholder="Start Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt1></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <div class="col-md-12">
+                        <mat-form-field appearance="legacy">
+                          <mat-label>End Date</mat-label>
+                          <input readonly matInput [(ngModel)]="dateObject.endDate" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" autocomplete="off" placeholder="End Date...">
+                          <mat-icon matSuffix>date_range</mat-icon>
+                          <owl-date-time #dt2></owl-date-time>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <mat-form-field floatLabel="always">
+                        <mat-label>Service Group</mat-label>
+                        <mat-select name="service_group" [(ngModel)]="filters.servicegroup">
+                          <mat-option value="">Select</mat-option>
+                          <mat-option *ngFor="let item of servicegroups" [value]="item.id">{{ item?.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="form-group no-margin">
+                      <button type="button" class="btn btn-outline-primary btn_custom" (click)="gettransactions()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></button>
+                      <!--<a mat-mini-fab class="cmp-fa" (click)="gettransactions()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></a>-->
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="container px-lg-1 my-1 p-1 bg-white rounded shadow-sm pos_abs">
+                  <div fxLayout="row">
+                    <div class="data-container">
+                      <!--<div class="data-loading-shade" *ngIf="isLoadingResults">
+                        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+                      </div>-->
+
+                      <div class=" data-table-container">
+
+                        <table mat-table [dataSource]="dataSource" matSort class="data-table" (matSortChange)="customSort($event)">
+
+                          <!-- Checkbox Column -->
+                          <ng-container matColumnDef="select" sticky>
+                            <th mat-header-cell *matHeaderCellDef>
+                              <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
+                                            [checked]="selection.hasValue() && isAllSelected()">
+                              </mat-checkbox>
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                              <mat-checkbox *ngIf="showrefundcheckbox(row)" color="primary" (click)="$event.stopPropagation()"
+                                            (change)="$event ? selection.toggle(row) : null"
+                                            [checked]="selection.isSelected(row)">
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+                          <!--<ng-container matColumnDef="gtrid" sticky>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>GTR ID</th>
+                            <td mat-cell *matCellDef="let row">{{row?.gtrid}}</td>
+                          </ng-container>-->
+
+                          <ng-container matColumnDef="serviceid">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE CODE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.serviceid}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicename">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE NAME</th>
+                            <td mat-cell *matCellDef="let row">{{row?.servicename}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="productname_es">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>PRODUCT NAME</th>
+                            <td mat-cell *matCellDef="let row">{{row?.productname_es}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="service_type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARG TYPE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.service_type}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicegroup">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE GROUP</th>
+                            <td mat-cell *matCellDef="let row">{{row?.servicegroup}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="trans_type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>TRANS TYPE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.trans_type}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="sourcechannel">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SOURCE CHANNEL</th>
+                            <td mat-cell *matCellDef="let row">{{row?.sourcechannel}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="originating_timestamp">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>TRANS ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.originating_timestamp}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="charge_status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGE STATUS</th>
+                            <td mat-cell *matCellDef="let row">{{row?.charge_status}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="requested_price">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>REQ VALUE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.requested_price}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="charged_price">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARG VALUE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.charged_price}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="tax_amount">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>VAT</th>
+                            <td mat-cell *matCellDef="let row">{{row?.tax_amount}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="debt_amount">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>PENDING DEDUCT</th>
+                            <td mat-cell *matCellDef="let row">{{row?.debt_amount}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="refund_amount">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>REFUND ELIGIBLE</th>
+                            <td mat-cell *matCellDef="let row">
+                              <input *ngIf="row?.refundenabled == 1 " [disabled]="row?.refund_type!='3'" class="form-control" [(ngModel)]="row.refund_amount" autocomplete="off">
+                              <!--<input [readonly]="row?.refund_type!='3'" class="form-control" [(ngModel)]="row.refund_amount" autocomplete="off">-->
+
+                              <!--{{row?.refund_amount}}-->
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="refund_status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>REFUND STATUS</th>
+                            <td mat-cell *matCellDef="let row">{{row?.refund_status}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="remarks">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>REMARKS</th>
+                            <td mat-cell *matCellDef="let row">{{row?.remarks}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="cdesc">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARG DESC</th>
+                            <td mat-cell *matCellDef="let row">{{row?.cdesc}}</td>
+                          </ng-container>
+
+                          <ng-container cdkColumnDef="actions" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
+                            <td *cdkCellDef="let row">
+                              <button matTooltip="Get Service Details" (click)="serviceGroup(row)" class="btn black mt-ladda-btn button-ladda btn-circle btn-outline btn-xs">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: { id: 'charging_server_pagination', itemsPerPage: pageObject.pageSize, currentPage: pageObject.pageNo, totalItems: pageObject.totalRecords}"></tr>
+                        </table>
+
+                        <!--<div *ngIf="pageObject.totalRecords === 0">No records found</div>-->
+                      </div>
+                      <div class=" px-lg-1 my-1 bg-white rounded shadow-sm clearfix" *ngIf="pageObject.totalRecords > 0">
+                        <div class="mt-0">
+                          <div class="row">
+                            <div class="col-md-7 mt-0 text-left">
+                              <button class="pull-left mt-3" mat-stroked-button color="primary" mat-button [matMenuTriggerFor]="menu">Refund Actions</button>
+                              <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="FormRefundList('refund')">{{'Refund'| langFilter}}</button>
+                                <button mat-menu-item (click)="FormRefundList('refundunsub')">{{'Unsubscribe & Refund'| langFilter}}</button>
+                              </mat-menu>
+
+
+                              <!--<button class="pull-left mt-3" mat-stroked-button color="blue" (click)="unsubscribeservices()">Refund</button>
+                              <button class="pull-left mt-3" mat-stroked-button color="blue" (click)="unsubscribeservices()">Unsubscribe & Refund</button>-->
+
+                              <div class="pull-left">
+                                <mat-paginator #paginator class="custom-pagesize" [length]="pageObject?.totalRecords"
+                                               [pageSize]="pageObject?.pageSize" (page)="changePageSize($event)"
+                                               [pageSizeOptions]="[5, 10, 25, 100]">
+                                </mat-paginator>
+                              </div>
+                            </div>
+
+                            <div class="col-md-5 mt-3">
+                              <pagination-controls class="my-pagination"
+                                                   (pageChange)="changePage($event)"
+                                                   screenReaderCurrentLabel="You're on page"
+                                                   id="charging_server_pagination">
+                              </pagination-controls>
+                            </div>
+                          </div>
+                        </div>
+                         
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+

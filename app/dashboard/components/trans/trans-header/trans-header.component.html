@@ -1,0 +1,85 @@
+<div class="bg_white"></div>
+  <div class="detail_title fix_trans sticky" style="
+    border-bottom: 1px solid #f5f5f5;background: linear-gradient(to bottom, #ffffff 0%,#f3f3f3 37%,#ededed 41%,#ffffff 100%);position: sticky;
+    z-index: 1;top: 50px;">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 pl-0">
+          <div class="numb_search">
+            <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="enteredmobileno" placeholder="Enter Mobile Number">
+              <div class="input-group-append">
+                <button class="btn btn-secondary btn-ccc" type="button" (click)="getAccountDetails()">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!--<input type="text" class="form-control" name="field" placeholder="Mobile Number" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" numbersOnly style="background:transparent !important;padding-left: 10px !important;">-->
+
+
+        </div>
+        <!--<div class="col-md-1 p-0">
+          <button type="button" class="btn btn-outline-primary btn_custom" (click)="getaccountdetails()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></button>
+        
+        </div>-->
+        <div class="col-md-9 p-0">
+          <div class="list_items tabbed round">
+            <ul>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/profile/accountinfo"><a>PROFILE</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/activations"><a>SERVICES</a></li>
+              <li routerLinkActive="active-trans" [routerLinkActiveOptions]="{exact: true}" routerLink="/dashboard/subscriptions"><a>SUBSCRIPTIONS</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/chargingtransactions"><a>CHARGING</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/huaweitransactions"><a>HSDP</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/refunds"><a>REFUNDS</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/messagingtransactions"><a>MESSAGING</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/smstransactions"><a>SMS</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/ussdtransactions"><a>USSD</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/ivrtransactions"><a>IVR</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/webaoctransactions"><a>WEB AOC</a></li>
+              <li routerLinkActive="active-trans" routerLink="/dashboard/campaigntransactions"><a>CAMPAIGN</a></li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="fixed_sec">
+        <ul>
+          <li>MSISDN:</li>
+          <li class="font-weight-bold">{{enteredmobileno}}</li>
+        </ul>
+        <ul>
+          <li>{{'Name'| langFilter}}:</li>
+          <li class="font-weight-bold elips_name">{{accountinfo.subscriber.fname?accountinfo.subscriber.fname:'--'}}</li>
+        </ul>
+        <ul>
+          <li>{{'Type'| langFilter}}:</li>
+          <li class="font-weight-bold"> {{tmp_usertype | customsubscribertype }}</li>
+        </ul>
+        <ul>
+          <li>{{'Network'| langFilter}}:</li>
+          <li class="font-weight-bold">{{tmp_networktype | customnetworktype}}</li>
+        </ul>
+        <ul>
+          <li>{{'Tier'| langFilter}}:</li>
+          <li class="font-weight-bold">{{tmp_subtier?tmp_subtier:'--'}}</li>
+        </ul>
+        <ul>
+          <li>{{'Status'| langFilter}}:</li>
+          <li class="font-weight-bold" *ngIf="accountinfo.subscriber.state==1">Active</li>
+          <li class="font-weight-bold" *ngIf="accountinfo.subscriber.state==0">InActive</li>
+          <li class="font-weight-bold" *ngIf="accountinfo.subscriber.state==2">OnHold</li>
+          <li class="font-weight-bold" *ngIf="accountinfo.subscriber.state==4">Closed</li>
+        </ul>
+        <ul>
+          <li>{{'Updated'| langFilter}}:</li>
+          <li class="font-weight-bold"> {{accountinfo.subscriber.updatedOn}}</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+

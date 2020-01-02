@@ -1,0 +1,119 @@
+<h2 mat-dialog-title>SERVICE DETAILS</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content style="min-height:400px;padding-top: 5px;">
+
+  <div class="container-fluid">
+    <div class="container px-lg-1 my-1 p-1 bg-white rounded shadow-sm">
+      <div fxLayout="row">
+        <div class="data-container">
+          <div class="data-loading-shade" *ngIf="isLoadingResults">
+            <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+          </div>
+
+          <div class="data-table-container">
+
+            <table mat-table [dataSource]="dataSource" class="data-table">
+              <ng-container matColumnDef="productid">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let row">{{row?.productid}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let row">{{row?.name}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="subsctiontype">
+                <th mat-header-cell *matHeaderCellDef>Product Type</th>
+                <td mat-cell *matCellDef="let row">{{row?.subsctiontype | customproducttypebyidpipe}}</td>
+              </ng-container>
+              <ng-container matColumnDef="pricemodel">
+                <th mat-header-cell *matHeaderCellDef>Pricing Model</th>
+                <td mat-cell *matCellDef="let row">{{row?.pricemodel | custompricemodelbyidpipe}}</td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="activationprice">
+                <th mat-header-cell *matHeaderCellDef>Price {{currency}}</th>
+                <td mat-cell *matCellDef="let row">
+                  <span>
+                    Activation Price: {{row?.priceplans[0]?.activationprice}}
+                  </span>
+                  <span>
+                    Renewal Price: {{row?.priceplans[0]?.renewalprice}}
+                  </span>
+                  <span>
+                    Alert Price: {{row?.priceplans[0]?.alertprice}}
+                  </span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="duration">
+                <th mat-header-cell *matHeaderCellDef>Life Cycle(days)</th>
+                <td mat-cell *matCellDef="let row">
+                  <span *ngIf="row.duration">
+                    Activation Period: {{row?.duration}}
+                  </span>
+                  <span *ngIf=" row.freeperiod">
+                    Free Period: {{ row?.freeperiod}}
+                  </span>
+                  <span *ngIf="row.graceperiod">
+                    Grace Period: {{row?.graceperiod}}
+                  </span>
+                  <span *ngIf="row.parkingperiod">
+                    Parking Period: {{row?.parkingperiod}}
+                  </span>
+                  <span *ngIf="row.benefitperiod">
+                    Benefit Period: {{row?.benefitperiod}}
+                  </span>
+                  <span *ngIf="row.fraudperiod">
+                    Fraud Period: {{row?.fraudperiod}}
+                  </span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="unsubscriptionmode">
+                <th mat-header-cell *matHeaderCellDef>Unsub Model</th>
+                <td mat-cell *matCellDef="let row">
+                  {{row?.unsubscriptionmode}}
+
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let row">
+                  <button id="_activate" title="Activate Service" (click)="ActivateService(row)" class="btn blue mt-ladda-btn button-ladda btn-circle btn-outline btn-xs activate_product"><i class="fa fa-shopping-cart"></i></button>
+                </td>
+              </ng-container>
+              <ng-container cdkColumnDef="productsubstatus" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef>User Status</th>
+                <td *cdkCellDef="let row">
+                  {{row?.productsubstatus}}
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: { id: 'products_pagination', itemsPerPage: pageObject.pageSize, currentPage: pageObject.pageNo, totalItems: pageObject.totalRecords}"></tr>
+            </table>
+
+            <!--<div *ngIf="pageObject.totalRecords === 0">No records found</div>-->
+          </div>
+          <div class=" px-lg-1 my-1 p-1 bg-white rounded shadow-sm">
+            <div class="mt-2">
+              <pagination-controls class="my-pagination"
+                                   (pageChange)="changePage($event)"
+                                   screenReaderCurrentLabel="You're on page"
+                                   id="products_pagination">
+              </pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="pull-right">
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <!--<button class="mat-raised-button mat-primary" type="submit">Submit</button>-->
+</mat-dialog-actions>

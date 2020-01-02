@@ -1,0 +1,92 @@
+.profile-sidebar {
+  float: left;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.marbtm_20 {
+  margin-bottom: 20px !important;
+}
+
+.portlet.light {
+  position: relative;
+}
+
+.portlet.light {
+  padding: 12px 20px 15px;
+  background-color: #fff;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+
+
+.form-group.form-md-line-input {
+  margin: 0px 0px 10px;
+  padding-top: 10px;
+}
+
+.form-group.form-md-line-input {
+  position: relative;
+  padding-top: 20px;
+}
+
+  .form-group.form-md-line-input .form-control {
+    max-width: 100%;
+    width:100% !important;
+  }
+
+    .form-group.form-md-line-input label {
+      font-size: 12px;
+      color: #6e6e6e;
+      font-weight: 500;
+    }
+
+.profile-sidebar {
+  float: left;
+  width: 25% !important;
+  margin-right: 20px;
+  box-shadow: 4px 8px 40px #ccc;
+  /*padding: 10px;*/
+  min-height:301px !important;
+}
+
+.profile-content {
+  float: right;
+  width: 71% !important;
+  margin-right: 20px;
+  box-shadow: 4px 8px 40px #ccc;
+}
+
+.nav-tabs {
+  text-align: right !important;
+}
+
+  .nav-tabs .nav-item .active {
+    border-top: 2px solid #36c6d3 !important;
+  }
+.err {
+  color: red;
+  font-size: 12px;
+}
+.btmborder {
+  border-bottom: 1px solid #dee2e6;
+}
+.caption-subject {
+  color: #3598dc !important;
+  font-size: 15px;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.pad0{
+  padding:0 !important;
+}

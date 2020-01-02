@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>
+  UPLOAD USER
+</h2>
+<mat-dialog-content class="mat-typography">
+ 
+  <p>
+    <mat-form-field>
+      <mat-select placeholder="User Type"[(ngModel)]="selectedusertype">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let usertype of usertypes" [value]="usertype.value">
+          {{usertype.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+   <app-upload-file-dialog (uploadedresp)="getUploadResp($event)"></app-upload-file-dialog>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-stroked-button color="warn" mat-dialog-close>Close</button>
+  <button mat-button mat-stroked-button color="primary" (click)="addbulkuseruploaddata()" cdkFocusInitial>Submit</button>
+   
+</mat-dialog-actions>
+ 

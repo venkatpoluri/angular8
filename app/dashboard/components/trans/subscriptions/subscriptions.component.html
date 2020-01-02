@@ -1,0 +1,266 @@
+
+<section class="basic_details sticky base80">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <app-trans-header></app-trans-header>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+
+
+                <div class="detail_title">
+                  <h4>
+                    <i class="icon-settings"></i><span class="user">SUBSCRIPTIONS</span>
+                    <button type="button" [ngClass]="isOpen ? 'btn btn-outline-grey btn_custom1 pull-right marg10' : 'btn btn-outline-primary btn_custom1 pull-right marg10'" (click)="toggle()">
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+                    </button>
+
+                    <!--<a [ngClass]="isOpen ? 'cmp-fa-gray pull-right marg10' : 'cmp-fa pull-right marg10'" mat-mini-fab (click)="toggle()">
+    <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+    <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+  </a>-->
+
+                  </h4>
+                </div>
+                <div class="container px-lg-3 my-1 p-1 bg-white rounded shadow-sm" [@openClose]="!isOpen ? 'open' : 'closed'">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <mat-form-field floatLabel="always">
+                            <mat-label>Service Group</mat-label>
+                            <mat-select name="service_group" [(ngModel)]="filters.servicegroup">
+                              <mat-option value="">Select</mat-option>
+                              <mat-option *ngFor="let item of servicegroups" [value]="item.id">{{item?.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field floatLabel="always">
+                            <mat-label>Service Name</mat-label>
+                            <input matInput type="text" autocomplete="off" value="&nbsp;" ngModel="{{servicedetails?.servicename}}" maxlength="30">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field floatLabel="always">
+                            <mat-label>Channel</mat-label>
+                            <mat-select name="channels" [(ngModel)]="filters.channel">
+                              <mat-option value="">Select</mat-option>
+                              <mat-option *ngFor="let item of channels" [value]="item?.name?.toLowerCase()">{{ item?.name }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                          <mat-form-field floatLabel="always">
+                            <mat-label>Status</mat-label>
+                            <mat-select name="status" [(ngModel)]="filters.status">
+                              <mat-option value="">Select</mat-option>
+                              <mat-option *ngFor="let item of srvstatus" [value]="item?.value">{{ item?.name }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <button type="button" class="btn btn-outline-primary btn_custom" (click)="applyFilter()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></button>
+                          <!--<a mat-mini-fab class="cmp-fa" (click)="applyFilter()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></a>-->
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="container px-lg-1 my-1 p-1 bg-white rounded shadow-sm pos_abs">
+                  <div fxLayout="row">
+                    <div class="data-container">
+                      <!--<div class="data-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>-->
+
+                      <div class="data-table-container" *ngIf="dataSource.data.length > 0">
+                        <table mat-table [dataSource]="dataSource" matSort class="data-table">
+
+                          <!-- Checkbox Column -->
+                          <ng-container matColumnDef="select" sticky>
+                            <th mat-header-cell *matHeaderCellDef>
+                              <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
+                                            [checked]="selection.hasValue() && isAllSelected()">
+                                <!--[indeterminate]="selection.hasValue() && !isAllSelected()"-->
+                              </mat-checkbox>
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                              <mat-checkbox *ngIf="row?.hasactiveservice" color="primary" (click)="$event.stopPropagation()"
+                                            (change)="$event ? selection.toggle(row) : null"
+                                            [checked]="selection.isSelected(row)">
+                              </mat-checkbox>
+
+                              <!--<mat-checkbox *ngIf="!row?.hasactiveservice" [disabled]="true"></mat-checkbox>-->
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="srvcCode">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE CODE</th>
+                            <td mat-cell *matCellDef="let row">{{row?.srvcCode}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="sname">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE NAME</th>
+                            <td mat-cell *matCellDef="let row">{{row?.sname}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="productname">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>PRODUCT NAME</th>
+                            <td mat-cell *matCellDef="let row">{{row?.productname}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicetype">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>CHARGE TYPE</th>
+                            <td mat-cell *matCellDef="let row">
+                              <span *ngIf="row?.servicetype=='1'">PPU</span>
+                              <span *ngIf="row?.servicetype=='2'">Subscription</span>
+                              <span *ngIf="row?.servicetype=='3'">BUNDLE</span>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicegroup">
+                            //TODO
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SERVICE GROUP</th>
+                            <td mat-cell *matCellDef="let row">{{row?.servicegroup | servicegroupbyid}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="actChannel">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>SOURCE CHANNEL</th>
+                            <td mat-cell *matCellDef="let row">{{row?.actChannel}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="servicestatus">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
+                            <td mat-cell *matCellDef="let row" [innerHtml]="row | userstatusbyproduct : 'state':'subStatus'"></td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="regOn">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>REGISTERED ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.regOn | customdateformat}}</td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="actOn">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>ACTIVATED ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.actOn | customdateformat}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="deactDate">
+                            //TODO
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>DEACTIVATED ON</th>
+                            <td mat-cell *matCellDef="let row">{{getDeactDate(row)}}</td>
+                          </ng-container>
+
+
+
+                          <ng-container matColumnDef="updatedOn">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>UPDATED ON</th>
+                            <td mat-cell *matCellDef="let row">{{row?.updatedOn | customdateformat}}</td>
+                          </ng-container>
+
+
+
+                          <ng-container matColumnDef="validity">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>VALIDITY</th>
+                            <td mat-cell *matCellDef="let row">{{row?.validity}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="inBnft">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>IN BENIFIT PERIOD</th>
+                            <td mat-cell *matCellDef="let row">
+                              <span *ngIf="row?.inBnft == '1'">YES</span>
+                              <span *ngIf="row?.inBnft != '1'">NO</span>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="renCycleCnt">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>RENEWAL /RECURRING COUNT</th>
+                            <td mat-cell *matCellDef="let row">{{row?.renCycleCnt}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="nextRenewal">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>NEXT RENEWAL /RECURRING DATE</th>
+                            <td mat-cell *matCellDef="let row">{{getNextRenewalDate(row, 'nextRenewal')}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="renewedOn">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>LAST RENEWAL /RECURRING DATE</th>
+                            <td mat-cell *matCellDef="let row">{{getNextRenewalDate(row, 'renewedOn')}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="lbPrice">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>LAST CHARGED AMOUNT</th>
+                            <td mat-cell *matCellDef="let row">{{row?.lbPrice}}</td>
+                          </ng-container>
+
+                          <ng-container cdkColumnDef="actions" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
+                            <td *cdkCellDef="let row">
+                              <button matTooltip="Get Service Details" (click)="serviceGroup(row)" class="btn black mt-ladda-btn button-ladda btn-circle btn-outline btn-xs">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: { id: 'sub_subscription_pagination', itemsPerPage: pageObject.pageSize, currentPage: pageObject.pageNo, totalItems: pageObject.totalRecords}"></tr>
+                        </table>
+                      </div>
+                      <div class="nodata" *ngIf="dataSource.data.length === 0"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No Data Found</div>
+                      <div class=" px-lg-1 my-1 p-1 bg-white rounded shadow-sm clearfix" *ngIf="pageObject.totalRecords > 0">
+                        <div class="mt-0">
+
+                          <div class="row">
+                            <!--<label for="staticEmail" class="col-sm-4 col-form-label mt-0 pr-1">Items per page</label>
+        <div class="col-sm-3">
+          <mat-form-field class="table-page-size">
+            <mat-select (selectionChange)="changePageSize($event?.value)" [(ngModel)]="pageObject.pageSize" [disabled]="pageObject.totalRecords <= 0">
+              <mat-option *ngFor="let pgsize of pagesizes; let i = index" [value]="pgsize"
+                          [disabled]="pageObject.totalRecords < pagesizes[i-1]">{{pgsize}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>-->
+
+                            <div class="col-md-8 mt-0 text-left">
+                              <button class="pull-left mt-3" mat-stroked-button color="accent" (click)="unsubscribeservices()">Unsubscribe</button>
+                              <div class="pull-left">
+                                <mat-paginator #paginator class="custom-pagesize" [length]="pageObject?.totalRecords"
+                                               [pageSize]="pageObject?.pageSize"
+                                               [pageSizeOptions]="[5, 10, 25, 100]">
+                                </mat-paginator>
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <pagination-controls class="my-pagination mt-3 pull-right"
+                                                   (pageChange)="changePage($event)"
+                                                   screenReaderCurrentLabel="You're on page"
+                                                   id="sub_subscription_pagination">
+                              </pagination-controls>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

@@ -1,0 +1,112 @@
+<section>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a> <i class="fa fa-angle-right"></i></li>
+      <li class="breadcrumb-item active" aria-current="page">Users</li>
+    </ol>
+  </nav>
+</section>
+<section class="basic_details">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <div class="detail_title">
+            <h4>
+              <i class="icon-settings"></i><span class="user">USERS</span>
+              <a [ngClass]="isOpen ? 'cmp-fa-gray pull-right marg10' : 'cmp-fa pull-right marg10'" mat-mini-fab (click)="toggle()">
+                <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+                <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+              </a>
+              <!--<a class="pull-right cmp-fa" mat-mini-fab routerLink="/adduser"><i class="fa fa-plus" aria-hidden="true" matTooltip="add"></i></a>-->
+              <a class="btn blue mt-ladda-btn ladda-button btn-circle btn-outline pull-right marright_5 ng-scope" title="Add Agents" (click)="createuserDialog()">
+                <i class="fa fa-plus">
+                </i>
+              </a>
+            </h4>
+          </div>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+                <div class="filter-section open-close-container" [@openClose]="isOpen ? 'open' : 'closed'">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group form-md-line-input">
+                        <label>
+                          User Type
+                        </label>
+                        <select name="sample_2_length" aria-controls="sample_2" class="form-control select2"
+                                [(ngModel)]="userType" (change)="ShowBusinessUnit()">
+                          <option value="">Select</option>
+                          <option *ngFor="let item of userTypesList" value="{{item.id}}">{{item.name}}</option>
+                        </select>
+
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="sel1">
+                          Status
+                        </label>
+                        <select class="form-control" id="num" name="userrole" [(ngModel)]="fstatus">
+                          <option value="">All</option>
+                          <option value="1">Active</option>
+                          <option value="0">Inactive</option>
+                          <option value="2">Deleted</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                      <div class="form-group form-md-line-input" *ngIf="showBU=='1'">
+                        <label for="ddlusertype">
+                          Business Unit
+                        </label>
+                        <select class="form-control select2" id="ddlfBusinessUnit" [(ngModel)]="fusp">
+                          <option value="0">Select</option>
+                          <option *ngFor="let item of serviceProvidersList" value="{{item.id}}">{{item.name}}</option>
+                        </select>
+
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group form-md-line-input nopad nomar martop_-2">
+                        <div class="input-group">
+                          <div class="form-row">
+                            <input id="txtSearch" class="form-textbox" type="text" safe-chars maxlength="20" [(ngModel)]="searchstring">
+
+                            <label for="txtSearch" class="form-label">
+                              Search
+                            </label>
+                          </div>
+                          <div class="form-group">
+                            <a mat-mini-fab class="cmp-fa search_btn" (click)="getUsersData()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="tab dsk">
+                      <table class="stripe row-border order-column" id="users_grid"></table>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

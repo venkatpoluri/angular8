@@ -1,0 +1,149 @@
+
+
+
+:focus {
+  outline: none !important;
+}
+/* Structure */
+.data-container {
+  position: relative;
+  min-height: 200px;
+}
+
+.data-table-container {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.data-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+th.mat-column-gtrid, td.mat-column-gtrid {
+  padding-left: 8px;
+}
+
+.mat-table-sticky:first-child {
+  border-right: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky:last-child {
+  border-left: 1px solid #e0e0e0;
+}
+
+
+.mat-column-actions {
+  flex: 0 0 25% !important;
+  min-width: 120px !important;
+  padding-right: 8px;
+}
+
+
+.mat-column-message {
+  flex: 0 0 25% !important;
+  min-width: 180px !important;
+}
+
+.mat-column-service_type {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+.mat-column-type {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-servicename {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+.mat-column-service_code {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-servicegroup {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-trans_type {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-originating_timestamp {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-sourcechannel {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-sendercode {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-deliver_status {
+  flex: 0 0 25% !important;
+  min-width: 200px !important;
+}
+
+.mat-column-submittimestamp {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-delivered_on {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-partner_del_status {
+  flex: 0 0 25% !important;
+  min-width: 200px !important;
+}
+
+.mat-column-partner_del_timestamp {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-charge_status {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-charged_price {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}
+
+.mat-column-final_status {
+  flex: 0 0 25% !important;
+  min-width: 150px !important;
+}

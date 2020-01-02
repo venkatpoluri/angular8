@@ -1,0 +1,220 @@
+<h2 mat-dialog-title>
+  SERVICE DETAILS
+  <button type="button" class="btn btn-outline-primary btn_custom pull-right" (click)="close()"><i class="fa fa-close" aria-hidden="true" matTooltip="close"></i></button>
+ 
+</h2>
+<hr />
+<mat-dialog-content style="min-height:468px;padding-top: 5px;">
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-12">
+        <mat-tab-group>
+          <!--SERVICE INFO-->
+          <mat-tab label="SERVICE INFO">
+            <mat-card class="tab-content">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Service Name</mat-label>
+                    <input matInput type="text" autocomplete="off" value="&nbsp;" ngModel="{{servicedetails?.servicename}}" disabled>
+
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Service Group</mat-label>
+                    <input matInput type="text" autocomplete="off" value="&nbsp;" disabled>
+
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Current Status</mat-label>
+                    <input matInput type="text" style="display:none;" value="&nbsp;" disabled>
+
+                    <span class="badge badge-success" *ngIf="servicedetails?.status==1">Active</span>
+                    <span class="badge badge-warning" *ngIf="servicedetails?.status==2">Testing</span>
+                    <span class="badge badge-danger" *ngIf="servicedetails?.status==0">InActive</span>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Partner Name</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{servicedetails?.servicename}}" value="&nbsp;" disabled>
+
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Partner Type</mat-label>
+                    <input matInput type="text" autocomplete="off" ng-sho ngModel="{{servicedetails?.partnerrole==1010006?'Service Partner':'ContentPartner'}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Agreement ID</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{servicedetails?.clano}}" value="&nbsp;" disabled>
+
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label> Start Date</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{servicedetails?.startdate}}" value="&nbsp;" disabled>
+
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>End Date</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{servicedetails?.enddate}}" value="&nbsp;" disabled>
+
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Agreeement Name</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{servicedetails?.claname}}" value="&nbsp;" disabled>
+
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput type="text" ngModel="{{servicedetails?.longdesc}}" disabled></textarea>
+
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+          </mat-tab>
+
+          <!--PRODUCT INFO-->
+          <mat-tab label="PRODUCT INFO">
+            <mat-card class="tab-content">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'ProductId'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.productid}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'Product Name'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.productname}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'Product Price'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.productprice}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label> {{'Aggrement Id'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.aggrementid}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'Charge Code'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.chargecode}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'Tariff Code'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.tariffcode}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label> {{'Price Plan Id'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.priceplanid}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'Start Date'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.startdate}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'End Date'| langFilter}}</mat-label>
+                    <input matInput type="text" autocomplete="off" ngModel="{{productInfo?.enddate}}" value="&nbsp;" disabled>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'Description'| langFilter}}</mat-label>
+                    <textarea matInput ngModel="{{productInfo?.desc}}" disabled></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+          </mat-tab>
+
+          <!--SUPPORT INFO-->
+          <mat-tab label="SUPPORT INFO">
+            <mat-card class="tab-content">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field floatLabel="always">
+                    <mat-label>{{'Control Commands'| langFilter}}</mat-label>
+                    <textarea matInput disabled></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+          </mat-tab>
+
+          <!--CHARGING-->
+          <mat-tab label="CHARGING">
+            <mat-card class="tab-content">
+              <app-charging-details></app-charging-details>
+            </mat-card>
+          </mat-tab>
+
+
+          <!--NOTIFICATIONS-->
+          <mat-tab label="NOTIFICATIONS">
+            <mat-card class="tab-content">
+              <app-notification-details></app-notification-details>
+            </mat-card>
+          </mat-tab>
+
+
+          <!--ALERTS-->
+          <mat-tab label="ALERTS">
+            <mat-card class="tab-content">
+              <app-alerts></app-alerts>
+            </mat-card>
+          </mat-tab>
+
+          <!--ALERTS-->
+          <mat-tab label="SERVICE REQUESTS">
+            <mat-card class="tab-content">
+              <app-service-requests></app-service-requests>
+            </mat-card>
+          </mat-tab>
+
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+

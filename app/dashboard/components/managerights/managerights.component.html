@@ -1,0 +1,111 @@
+<section>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a> <i class="fa fa-angle-right"></i></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Menu Management
+      </li>
+    </ol>
+  </nav>
+</section>
+<section class="basic_details">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <div class="detail_title uppercase">
+            <h4>
+              <span> Menu Management </span>
+              <span *ngIf="userid !='0'">{{stateusername}}  </span>  <span *ngIf="userid !='0'">{{stateuserrole}}</span>
+            </h4>
+          </div>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+                <div class="filter-section open-close-container">
+                  <div class="row">
+                    <div class="col-md-5" *ngIf="permissionsby ==0">
+                      <div class="form-group">
+                        <label class="control-label"> User Role:</label>
+                        <select class="form-control" placeholder="select" aria-hidden="true" [(ngModel)]="roleid"
+                                (change)="onchangeRole()">
+                          <option *ngFor="let item of rolesmaster" value="{{item.id}}">{{item.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--<div class="col-md-3">
+                      <div class="form-group">
+                        <label class="control-label"></label>
+                        <input class="form-control input-sm" type="text" [(ngModel)]="filterString" safeChars placeholder="Filter" />
+                      </div>
+                    </div>-->
+                    <div class="col-md-3 pull-right">
+                      <div class="form-group" style="padding-top:29px;">
+                        <a *ngIf="permissionsby ==1" (click)="resetuser()" class="btn btn-outline-secondary">Reset User</a> &nbsp; &nbsp; &nbsp;
+                        <a (click)="SaveManagerights()" class="btn btn-outline-primary">Save</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                   
+                      <table class="table table-hover permission-table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th width="40%"> Name</th>
+                            <th width="12%"> View</th>
+                            <th width="12%"> Create </th>
+                            <th width="12%"> Modify </th>
+                            <th width="12%"> Action(s)</th>
+                            <th width="12%"> Export</th>
+                          </tr>
+                        </thead>
+                      </table>
+                      <ul class="nav nav-list nav-menu-list-style" id="ulmenus">
+                        <li (click)="liclickevent(m)" *ngFor="let m of menusList;" id="li_{{m.menuid}}_{{m.parentid}}" [attr.parentid]="m.parentid" [ngClass]="m.menulevel ==1?'parent':'child hide'">
+                          <label class="label-permission" [ngClass]="m.menulevel ==2?'child-padding':''"><i class={{m.plusMinusIcon}}></i>{{m.title}}</label>
+                          <div class="checkbox-section">
+                            <div class="form-check">
+                              <label class="form-check-label" for="vw_{{m.menukey}}">
+                                <input type="checkbox" class="form-check-input" id="siview_{{m.menukey}}" name="{{m.menukey}}" checked="{{getPermission(m.menukey,'view')}}" (change)="updateSelectedPermissions($event)">
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <label class="form-check-label" for="cr_{{m.menukey}}" *ngIf="m.childcount == 0">
+                                <input type="checkbox" class="form-check-input" id="siadd_{{m.menukey}}" name="{{m.menukey}}" checked="{{getPermission(m.menukey,'add')}}" (change)="updateSelectedPermissions($event)">
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <label class="form-check-label" for="md_{{m.menukey}}" *ngIf="m.childcount == 0">
+                                <input type="checkbox" class="form-check-input" id="siedit_{{m.menukey}}" name="{{m.menukey}}" checked="{{getPermission(m.menukey,'edit')}}" (change)="updateSelectedPermissions($event)">
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <label class="form-check-label" for="del_{{m.menukey}}" *ngIf="m.childcount == 0">
+                                <input type="checkbox" class="form-check-input" id="simoderate_{{m.menukey}}" name="{{m.menukey}}" checked="{{getPermission(m.menukey,'moderate')}}" (change)="updateSelectedPermissions($event)">
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <label class="form-check-label" for="ex_{{m.menukey}}" *ngIf="m.childcount == 0">
+                                <input type="checkbox" class="form-check-input" id="siexport_{{m.menukey}}" name="{{m.menukey}}" checked="{{getPermission(m.menukey,'export')}}" (change)="updateSelectedPermissions($event)">
+                              </label>
+                            </div>
+                          </div>
+
+                        </li>
+                      </ul>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

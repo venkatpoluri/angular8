@@ -1,0 +1,97 @@
+<div class="header">
+  <a id="menu-action">
+    <!-- <i class="fa fa-bars"></i> -->
+    <span class="img_logo"><img src="assets/images/logo.png"></span>
+  </a>
+  <div class="logo">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="logo">
+            <img src="assets/images/logo-default.png">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="profile">
+            <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
+            <div class="half">
+              <label for="profile2" class="profile-dropdown">
+                <input type="checkbox" id="profile2">
+                <img src="https://cdn0.iconfinder.com/data/icons/avatars-3/512/avatar_hipster_guy-512.png">
+                <!-- <span>John Doe</span> -->
+                <label for="profile2"><i class="mdi mdi-menu"></i></label>
+                <ul>
+                  <li><a href="#"><i class="mdi mdi-email-outline"></i>Messages</a></li>
+                  <li><a href="#"><i class="mdi mdi-account"></i>Account</a></li>
+                  <li><a href="#"><i class="mdi mdi-settings"></i>Settings</a></li>
+                  <li><a href="#"><i class="mdi mdi-logout"></i>Logout</a></li>
+                </ul>
+              </label>
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="sidebar" id="style-7">
+  <ul>
+    <li routerLinkActive="active-link">
+      <a>
+        <i class="icon-home"></i>
+        <span class="title">Dashboard</span>
+        <span class="selected"></span>
+      </a>
+    </li>
+
+    <li><a><i class="icon-people"></i><span class="title">Server</span></a></li>
+    <li>
+      <a><i class="fa fa-cloud"></i><span class="title">Calendar</span></a>
+      <ul class="sub-menu dropup">
+        <li><a><span class="title">Server</span></a></li>
+        <li><a><span class="title">Server</span></a></li>
+        <li><a><span class="title">Server</span></a></li>
+        <li><a><span class="title">Server</span></a></li>
+
+      </ul>
+
+    </li>
+    <li> <a><i class="icon-charging-gateway"></i><span class="title padtop">Messages</span></a></li>
+    <li> <a><i class="icon-messaging-gateway"></i><span class="title padtop">Data Table</span></a></li>
+    <li> <a><i class="icon-note"></i><span class="title">Data Table</span></a></li>
+    <li> <a><i class="fa fa-phone"></i><span class="title">Data Table</span></a></li>
+    <li> <a><i class="fa fa-bullhorn"></i><span class="title">Data Table</span></a></li>
+    <li> <a><i class="fa fa-film"></i><span class="title">Data Table</span></a></li>
+    <li> <a><i class="icon-user-unfollow"></i><span class="title">Data Table</span></a></li>
+    <li> <a><i class="icon-settings"></i><span class="title">Data Table</span></a></li>
+    <li> <a><i class="icon-chart"></i><span class="title">Data Table</span></a></li>
+    <li> <a><i class="icon-supporting"></i><span class="title">Data Table</span></a></li>
+    <li><a></a></li>
+
+  </ul>
+</div>
+
+<!-- Content -->
+<main class="main">
+
+  <!-- Breadcrumb -->
+  <ol class="breadcrumb">
+
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <a class="btn" href="#"><i class="icon-speech"></i></a>
+        <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+        <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
+      </div>
+    </li>
+  </ol>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</main>

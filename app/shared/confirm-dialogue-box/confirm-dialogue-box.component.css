@@ -1,0 +1,21 @@
+.confirm-ok{
+border: 1px solid #30b7f9;
+background: #30b7f9;
+color: #fff;
+font-weight: 500;
+border-radius: 4px;
+
+}
+.confirm-cancel{
+border: 1px solid #7f8182;
+background: #7f8182;
+border-color: #7f8182;
+color: #fff; 
+border-radius: 4px;}
+
+.confirm-modal { border-radius: 2px;
+ 
+    width: 350px;}
+.mat-raised-button {
+  line-height: 36px !important;
+}

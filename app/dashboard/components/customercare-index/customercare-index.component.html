@@ -1,0 +1,157 @@
+<style>
+  .width-download {
+    width: 100%;
+  }
+  .btn.btn-outline.blue {
+    width: 100%;
+    height: auto;
+    padding: 5px 10px;
+  }
+</style>
+<section class="basic_details">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+
+                <div class="portlet light portlet-bordered" id="divmget">
+                  <div class="portlet-title absbtm row">
+                    <div class="caption width-download">
+                      <i class="fa fa-smile-o font-dark"></i><span class="caption-subject bold uppercase ">
+                        {{'Customer care'| translate}}
+                      </span>
+                      <span style="float:right">
+                        <button class="btn blue mt-ladda-btn ladda-button btn-circle btn-outline btn-sm"
+                                (click)="DownloadCCareGuide();">
+                          {{'Download CCare Guide'| langFilter}}
+                        </button>
+                      </span>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 absright">
+                      <div class="dashboard-stat dashboard-stat-v2 blue marbtm_5">
+                        <div class="visual">
+                          <i class="fa fa-cogs"></i>
+                        </div>
+                        <div class="details">
+                          <div class="number">
+                            <span data-counter="counterup" class="ng-binding" name="totalRefundTransCount">{{totalrefundtrans}}</span>
+                          </div>
+                          <div class="desc ng-binding">
+                            {{'Total Refunds Requests' | langFilter}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 absright padleft_5">
+                      <div class="dashboard-stat dashboard-stat-v2 green-jungle marbtm_5">
+                        <div class="visual">
+                          <i class="icon-like"></i>
+                        </div>
+                        <div class="details">
+                          <div class="number">
+                            <span data-counter="counterup" name="processedTransCount">{{processedtrans}}</span><small class="font-green-sharp">
+                            </small>
+                          </div>
+                          <div class="desc ng-binding">
+                            {{'Processed Refunds'| langFilter}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 absright padleft_5 padright_10">
+                      <div class="dashboard-stat dashboard-stat-v2 red marbtm_5">
+                        <div class="visual">
+                          <i class="icon-chemistry"></i>
+                        </div>
+                        <div class="details">
+                          <div class="number">
+                            <span data-counter="counterup" class="ng-binding" name="pendingTransCount">{{pendingtrans}}</span><small class="font-green-sharp">
+                            </small>
+                          </div>
+                          <div class="desc ng-binding">
+                            {{'Pending Refunds'| langFilter}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="clearfix">
+                    </div>
+
+                  </div>
+                  <div class="sec_mob">
+                    <div class="row">
+
+                      <div class="col-sm-3">
+                        <div class="field_type">
+                          <div class="form-group form-md-line-input">
+                            <label>
+                              {{'Search By'| langFilter}}
+                            </label>
+                            <select class="form-control" [(ngModel)]="ccareindex.searchby" name="field">
+                              <option value="0">{{'Mobile Number'| langFilter}}</option>
+                              <option value="1">{{'Account Number' | langFilter}}</option>
+
+                            </select>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4" *ngIf="ccareindex.searchby == '0'">
+                        <div class="col-md-10 coll1">
+                          <div class="form-group form-md-line-input">
+                            <label class="control-label">
+                              <span class="ng-binding">{{'Mobile Number'| langFilter}}</span>
+
+                            </label>
+                            <input type="text" class="form-control" [(ngModel)]="ccareindex.mobilenumber" name="field" placeholder="Eg:66xxxxxxxxxx" onfocus="this.placeholder=''" onblur="this.placeholder='Eg:66xxxxxxxxxx'" numbersOnly (keydown.enter)="getfieldDetails(ccareindex)">
+
+                          </div>
+                        </div>
+                        <div class="col-md-2 coll1">
+                          <button class="btn btn-circle btn_cust" (click)="getfieldDetails(ccareindex)">{{'Get Details'| langFilter}}</button>
+                        </div>
+                      </div>
+                      <div class="col-sm-4" *ngIf="ccareindex.searchby == '1'">
+                        <div class="col-md-10 coll1">
+                          <div class="form-group form-md-line-input">
+                            <label class="control-label">
+                              <span class="ng-binding">{{'Account Number' | langFilter}}</span>
+
+                            </label>
+                            <input type="text" class="form-control" [(ngModel)]="ccareindex.accountnumber" name="field" placeholder="Eg:1234 xxxx xxxx xxxx" onfocus="this.placeholder=''" onblur="this.placeholder='Eg:1234 xxxx xxxx xxxx'" numbersOnly (keydown.enter)="getfieldDetails(ccareindex)">
+
+                          </div>
+                        </div>
+                        <div class="col-md-2 coll1">
+
+                          <button class="btn btn-circle btn_cust" (click)="getfieldDetails(ccareindex)">{{'Get Details'| langFilter}}</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

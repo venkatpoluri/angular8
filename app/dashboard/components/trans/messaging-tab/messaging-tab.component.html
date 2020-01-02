@@ -1,0 +1,72 @@
+
+<section class="basic_details sticky base80">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <app-trans-header></app-trans-header>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+
+
+                <div class="detail_title">
+                  <h4>
+                    <i class="icon-settings"></i><span class="user">Messaging Transactions</span>
+                    <a [ngClass]="isOpen ? 'cmp-fa-gray pull-right marg10' : 'cmp-fa pull-right marg10'" mat-mini-fab (click)="toggle()">
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="isOpen"></i>
+                      <i class="fa fa-filter" aria-hidden="true" matTooltip="filter" *ngIf="!isOpen"></i>
+                    </a>
+
+                  </h4>
+                </div>
+                <div class="filter-section open-close-container fft_height" [@openClose]="isOpen ? 'open' : 'closed'">
+                  <div class="row">
+
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-md-10 col-form-label">Start Date</label>
+                      <div class="col-md-10">
+
+                        <input type="text" id="demo3" class="form-control" [(ngModel)]="data.startdate" name="recurindate" autocomplete="off">
+
+                      </div>
+
+                    </div>
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-md-10 col-form-label">End Date</label>
+                      <div class="col-md-10">
+
+                        <input type="text" id="demo4" class="form-control" [(ngModel)]="data.enddate" name="recurindate" autocomplete="off">
+                      </div>
+                      <div class="form-group">
+                        <a mat-mini-fab class="cmp-fa " (click)="GetUsersList()"><i class="fa fa-search" aria-hidden="true" matTooltip="search"></i></a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="tab dsk">
+                      <table class="stripe row-border order-column" id="messaging_grid"></table>
+                     
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

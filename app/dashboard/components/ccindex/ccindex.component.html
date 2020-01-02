@@ -1,0 +1,147 @@
+<section>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a> <i class="fa fa-angle-right"></i></li>
+      <li class="breadcrumb-item active" aria-current="page">Customer Care</li>
+    </ol>
+  </nav>
+</section>
+<section class="basic_details">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <div class="detail_sec">
+          <div class="detail_title">
+            <h4>
+              <i class="icon-settings"></i><span class="user">USERS</span>
+              <a class="btn blue mt-ladda-btn ladda-button btn-circle btn-outline pull-right marright_5 ng-scope" title="Download Guide">
+                <i class="fa fa-download">
+                </i>
+              </a>
+            </h4>
+          </div>
+
+          <div class="details_inner">
+            <div class="type_camp">
+              <div class="container-fluid no-padding">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 absright">
+                    <div class="dashboard-stat dashboard-stat-v2 blue marbtm_5">
+                      <div class="visual">
+                        <i class="fa fa-cogs"></i>
+                      </div>
+                      <div class="details">
+                        <div class="number">
+                          <span data-counter="counterup" ng-bind="totalrefundtrans"></span>
+                        </div>
+                        <div class="desc">
+                          {{'Total Refunds Requests'| langFilter}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 absright padleft_5">
+                    <div class="dashboard-stat dashboard-stat-v2 green-jungle marbtm_5">
+                      <div class="visual">
+                        <i class="icon-like"></i>
+                      </div>
+                      <div class="details">
+                        <div class="number">
+                          <span data-counter="counterup" ng-bind="processedtrans"></span><small class="font-green-sharp">
+                          </small>
+                        </div>
+                        <div class="desc">
+                          {{'Processed Refunds'| langFilter}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 absright padleft_5 padright_10">
+                    <div class="dashboard-stat dashboard-stat-v2 red marbtm_5">
+                      <div class="visual">
+                        <i class="icon-chemistry"></i>
+                      </div>
+                      <div class="details">
+                        <div class="number">
+                          <span data-counter="counterup" ng-bind="pendingtrans"></span><small class="font-green-sharp">
+                          </small>
+                        </div>
+                        <div class="desc">
+                          {{'Pending Refunds'| langFilter}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="clearfix">
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-group form-md-line-input">
+                      <label class="control-label">
+                        {{'Field Type'| langFilter}}
+                      </label>
+                      <select class="form-control" [(ngModel)]="accountdetails.searchby"
+                              ng-change="fieldtypechange()">
+                        <option value="0">{{'Mobile Number'| langFilter}}</option>
+                        <option value="1">{{'Account Number'| langFilter}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="form-group form-md-line-input">
+                      <label class="control-label">
+                        <span [hidden]="accountdetails.accounttype==0">{{'Mobile Number'| langFilter}}</span>
+                        <span [hidden]="accountdetails.accounttype==1">{{'Account Number'| langFilter}}</span>
+                      </label>
+                      <input type="text" class="form-control"
+                             [(ngModel)]="accountdetails.usernumber"
+                             id="txtmmsisdn" placeholder="Eg:+{{mobilecountrycode}}xxxxxxxxx"
+                             maxlength="12" numbersOnly>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group form-md-line-input">
+                      <label class="control-label">
+                        {{'Start Datetime'| langFilter}}
+                      </label>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker" (click)="picker.open()" [min]="minDate" [max]="maxDate" [(ngModel)]="accountdetails.startdate" name="startdate" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker disabled="false"></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group form-md-line-input">
+                      <label class="control-label">
+                        {{'End Datetime'| langFilter}}
+                      </label>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="pickerend" (click)="picker.open()" [min]="minDate" [max]="maxDate" [(ngModel)]="accountdetails.enddate" name="enddate" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="pickerend"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerend disabled="false"></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-1 martop_30">
+                    <button class="btn blue mt-ladda-btn ladda-button btn-circle btn-outline btn-sm"
+                            (click)="getccdata();">
+                      <i class="fa fa-search">
+                      </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

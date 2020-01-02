@@ -1,0 +1,98 @@
+<div class="accounts">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 pad00">
+        <div class="header_textt">
+          <h4>
+            GROUP BLOCK LIST
+            <button type="button" class="btn btn-outline-primary btn_custom pull-right" (click)="groupblock()"><i class="fa fa-plus" aria-hidden="true" matTooltip="search"></i></button>
+          </h4>
+        </div>
+        <table style="width:100%">
+          <thead>
+            <tr>
+              <th>Service Group Name</th>
+              <th class="text-center">Status</th>
+              <th class="text-center">Action</th>
+              <th class="text-center">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of grpBlockList">
+              <td>{{item | servicegroupbyid }}</td>
+              <td class="text-center">
+                <span class="label label-success"> Active </span>
+              </td>
+              <td class="text-center">
+                <button type="button" class="btn btn-circle btn_cust" (click)="unblockservicegroup(item)">
+                  Remove
+                </button>
+                <!--<button type="button" class="btn blue md-ladda-btn button-ladda btn-circle btn-outline btn-text btn-sm" (click)="unblockservicegroup(item)">
+                  Remove
+                </button>-->
+              </td>
+              <td class="text-center">
+                <button type="button" class="btn btn-circle btn_cust" (click)="GetActionReason('BLOCKLISTSRVCGRP', item)">
+                  Details
+                </button>
+                <!--<button type="button" class="btn blue md-ladda-btn button-ladda btn-circle btn-outline btn-text btn-sm" (click)="GetActionReason('BLOCKLISTSRVCGRP', item)">
+                  Details
+                </button>-->
+              </td>
+            </tr>
+            <tr *ngIf="grpBlockList==undefined || grpBlockList.length==0">
+              <td colspan="4">No Records Found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-12 pad00 mt-sm-3">
+        <div class="header_textt">
+          <h4>
+            SERVICE BLOCK LIST
+            <button type="button" class="btn btn-outline-primary btn_custom pull-right"><i class="fa fa-plus" aria-hidden="true" matTooltip="search" (click)="serviceblock()"></i></button>
+          </h4>
+        </div>
+        <table style="width:100%">
+          <thead>
+            <tr>
+              <th>Service ID</th>
+              <th>Service Name</th>
+              <th class="text-center">Status</th>
+              <th class="text-center">Action</th>
+              <th class="text-center">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lstblockedservices">
+              <td>{{item.servicecode}}</td>
+              <td>{{item.sname}}</td>
+              <td><span class="label label-success"> Active </span></td>
+              <td>
+                <button type="button" class="btn btn-circle btn_cust" (click)="unblockservice(item)">
+                  Remove
+                </button>
+                <!--<button type="button" class="btn blue md-ladda-btn button-ladda btn-circle btn-outline btn-text btn-sm" (click)="unblockservice(item)">
+                  Remove
+                </button>-->
+              </td>
+              <td class="text-center">
+                <button type="button" class="btn btn-circle btn_cust" (click)="GetActionReason('BLOCKLISTSRVC', item)">
+                  Details
+                </button>
+
+                <!--<button type="button" class="btn blue md-ladda-btn button-ladda btn-circle btn-outline btn-text btn-sm" (click)="GetActionReason('BLOCKLISTSRVC', item)">
+                  Details
+                </button>-->
+              </td>
+            </tr>
+            <tr *ngIf="lstblockedservices==undefined || lstblockedservices.length==0">
+              <td colspan="5">No Records Found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+
+/* Structure */
+.data-container {
+  position: relative;
+  min-height: 200px;
+}
+
+.data-table-container {
+  position: relative;
+  min-height: auto !important;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+.ngx-pagination {
+  margin-bottom: 0px !important;
+}
+
+.mat-card {
+  padding-bottom: 0px !important;
+}
+
+.data-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+th.mat-column-gtrid, td.mat-column-gtrid {
+  padding-left: 8px;
+}
+
+.mat-table-sticky:first-child {
+  border-right: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky:last-child {
+  border-left: 1px solid #e0e0e0;
+}
+
+td.mat-column-actions {
+  width: 120px;
+  padding-right: 8px;
+}
+
+.mat-column-actions {
+  flex: 0 0 25% !important;
+  min-width: 104px !important;
+}
+.mat-table tbody td {
+  font-size: 12px;
+  padding: 10px 10px !important;
+}
+.mat-column-gtrid, .mat-column-trans_type, .mat-column-originating_timestamp, .mat-column-sourcechannel, .mat-column-sendercode, .mat-column-deliver_status, .mat-column-, .mat-column-delivered_on{
+  flex: 0 0 25% !important;
+  min-width: 200px !important;
+}
+.mat-column-message {
+  flex: 0 0 25% !important;
+  min-width: 400px !important;
+}
