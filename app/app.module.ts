@@ -21,7 +21,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
  
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-//import { UploadFileDialogComponent } from './shared/upload-file-dialog/upload-file-dialog.component';
+import { UploadFileDialogComponent } from './shared/upload-file-dialog/upload-file-dialog.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
  
